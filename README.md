@@ -66,7 +66,7 @@ Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup
 **Une nuit**
 
 1. Sur Discord, le narrateur annonce « Le village s'endort » : tout le monde coupe son micro.
-2. Sur TACNET, il appelle les rôles l'un après l'autre avec le micro à côté du nom du canal, qui ne parle qu'à ce canal : « Les loups-garous se réveillent ». Les loups se concertent entre eux en PTT Int et le narrateur les entend, ils désignent leur victime. Puis « La voyante se réveille » : elle répond, seul le narrateur l'entend. Puis la sorcière.
+2. Sur TACNET, il appelle les rôles l'un après l'autre : « Les loups-garous se réveillent ». Les loups se concertent entre eux en PTT Int et le narrateur les entend, ils désignent leur victime. Puis « La voyante se réveille » : elle répond, seul le narrateur l'entend. Puis la sorcière.
 3. Au matin, tout le monde rouvre son micro sur Discord et le narrateur annonce la victime.
 
 | Le narrateur voit tout et appelle un rôle à la fois | Un loup voit ses complices, et le narrateur qui lui parle |
