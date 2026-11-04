@@ -53,39 +53,39 @@ Le pas-à-pas détaillé est dans le guide (`README.html`) de `TACNET_APP.zip`. 
 
 ## Exemple : le Loup-Garou à 10 joueurs
 
-Les canaux masqués servent à garder un secret. Voici une partie de Loup-Garou en version simple : **3 loups-garous et 7 villageois**, sans les autres rôles. Le narrateur est le **gérant** : il ne joue pas, voit tout et place les joueurs.
+Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup-Garou à 10 joueurs : **3 loups-garous, 1 voyante, 1 sorcière et 5 villageois** (les autres rôles se gèrent de la même façon).
 
-**Mise en place**
+**Le principe** : TACNET ne remplace pas votre vocal habituel, il le complète. Le jour, tout le monde débat sur Discord (ou un autre vocal). La nuit, tout le monde coupe son micro sur Discord, et le narrateur utilise TACNET pour parler aux rôles de nuit, un par un. Chacun garde le même canal toute la partie : **personne n'a jamais à changer de canal**.
 
-1. Le narrateur crée la session et deux canaux, **Village** et **Loups**, puis active *Masquer les autres canaux aux joueurs* (Paramètres de la session, Communication).
-2. Les 10 joueurs rejoignent avec leur pseudo. Ils arrivent « hors canal vocal » et ne voient personne.
-3. Les rôles sont distribués en dehors de TACNET (cartes, messages privés) : seul le narrateur sait qui est loup.
+**Mise en place, une seule fois**
 
-**La nuit : le village dort**
+1. Le narrateur est le **gérant**. Il crée la session, puis active *Masquer les autres canaux aux joueurs* et *Le gérant entend toutes les communications* (Paramètres de la session, Communication). Il le fait **avant l'arrivée des joueurs** : sinon leurs premiers écrans montrent encore tous les canaux.
+2. Il crée un canal par rôle de nuit, **Loups**, **Voyante** et **Sorcière**, plus un canal **Narrateur** pour lui (il doit être dans un canal pour parler et pour écouter).
+3. Les 10 joueurs rejoignent la session : ils arrivent « hors canal vocal ». Le narrateur place les 3 loups dans Loups, la voyante dans Voyante et la sorcière dans Sorcière (glisser-déposer du joueur sur le canal, ou clic droit sur le joueur puis *Déplacer vers*), puis entre dans son canal. **Les 5 villageois ne bougent pas** : ils restent hors canal vocal, dans la session comme tout le monde, pour que leur présence ne trahisse aucun rôle.
 
-- Le narrateur place les 3 loups dans **Loups** (glisser-déposer du joueur sur le canal, ou clic droit sur le joueur puis *Déplacer vers*). Les loups se voient et se parlent entre eux, et ne voient aucun villageois.
-- Les 7 villageois restent **hors canal vocal** : ils n'entendent rien et ne voient personne. C'est leur façon de dormir.
+**Une nuit**
 
-| Un loup voit sa meute, et personne d'autre | Une villageoise endormie ne voit personne |
+1. Sur Discord, le narrateur annonce « Le village s'endort » : tout le monde coupe son micro.
+2. Sur TACNET, il appelle les rôles l'un après l'autre avec le micro à côté du nom du canal, qui ne parle qu'à ce canal : « Les loups-garous se réveillent ». Les loups se concertent entre eux en PTT Int et le narrateur les entend, ils désignent leur victime. Puis « La voyante se réveille » : elle répond, seul le narrateur l'entend. Puis la sorcière.
+3. Au matin, tout le monde rouvre son micro sur Discord et le narrateur annonce la victime.
+
+| Le narrateur voit tout et appelle un rôle à la fois | Un loup voit ses complices, et le narrateur qui lui parle |
 |---|---|
-| ![Vue d'un loup : le canal Loups avec ses deux complices](docs/loup-garou-loup.png) | ![Vue d'une villageoise endormie : hors canal vocal, seule dans la liste](docs/loup-garou-villageois-nuit.png) |
+| ![Vue du narrateur : les canaux Loups, Voyante, Sorcière et Narrateur, et cinq villageois hors canal vocal](docs/loup-garou-narrateur.png) | ![Vue d'un loup : le canal Loups avec ses deux complices, et le narrateur en direct](docs/loup-garou-loup.png) |
 
-| Le narrateur voit tout | Le jour, le village se réveille |
+| La voyante est seule dans son canal | Un villageois ne voit personne |
 |---|---|
-| ![Vue du narrateur : trois loups dans Loups, les villageois hors canal vocal](docs/loup-garou-narrateur.png) | ![Vue de jour : les 10 joueurs réunis dans le canal Village](docs/loup-garou-jour.png) |
+| ![Vue de la voyante : seule dans le canal Voyante, le narrateur lui parle](docs/loup-garou-voyante.png) | ![Vue d'un villageois : hors canal vocal, seul dans la liste](docs/loup-garou-villageois.png) |
 
-**Le jour : le village se réveille**
+**Ce que chacun voit** : un loup ne voit que ses complices ; la voyante et la sorcière ne voient qu'elles-mêmes ; un villageois ne voit personne et n'entend rien (l'application lui dit « le gérant va vous placer » : c'est normal, il n'a pas besoin de canal) ; seul le narrateur voit tout. Aucun joueur ne peut changer de canal, ni savoir qu'un autre canal existe.
 
-- Le narrateur place les 10 joueurs dans **Village** : tout le monde s'entend et voit les 10 pseudos, le débat peut commencer.
-- Le soir venu, il remet les 3 loups dans **Loups** et les villageois hors canal vocal.
-
-> **Pourquoi pas un canal « Villageois » ?** Un villageois y verrait la liste des 7 villageois, et son journal lui dirait qui est parti. Connaissant les 10 joueurs, il déduirait les loups par élimination. Hors canal vocal, il ne voit rien : il n'y a rien à déduire.
+> **Pourquoi pas un canal « Villageois » ?** Les villageois y verraient la liste des 5 autres villageois et en déduiraient qui a un rôle de nuit. Hors canal vocal, ils ne voient rien.
 
 **Bon à savoir**
 
-- Le narrateur doit être lui-même dans un canal pour parler. Son PTT Général est entendu par tous les joueurs placés dans un canal : annoncez « le village s'endort » avant de les mettre hors canal vocal, et le résultat de la nuit une fois le village réveillé.
-- Pour écouter les loups sans figurer dans leur canal, activez *Le gérant entend toutes les communications* et restez dans Village.
-- Chaque changement de phase demande une dizaine de déplacements. Un adjoint qui ne joue pas peut aider le narrateur : il voit tout, comme lui.
+- Pour un rôle de nuit de plus (Cupidon, par exemple), ajoutez un canal et placez-y le joueur.
+- Le PTT Général du narrateur est entendu par tous les joueurs placés dans un canal, mais pas par les villageois hors canal vocal.
+- Utilisez un casque : sinon la voix jouée par les haut-parleurs peut repartir dans le micro d'un autre vocal.
 
 ## Licence
 
