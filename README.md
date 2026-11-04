@@ -15,18 +15,21 @@ TACNET est une application Windows sans installation. Une personne crée une ses
 - **Rôles** : gérant, adjoint, joueur, auditeur, et des rôles personnalisés réglés option par option.
 - **Mode Half-Duplex** : un seul émetteur à la fois vers un canal.
 - **Canaux masqués** : chaque joueur ne voit que son propre canal, idéal pour garder le secret des équipes (exemple du Loup-Garou plus bas).
+- **Mises à jour signalées** : un bandeau prévient quand une nouvelle version est publiée, et quand le serveur n'est pas à jour, pour que son hébergeur le sache.
 - **Léger** : Windows 64 bits, un seul fichier .exe, sans installation.
 
 ## Télécharger
 
-Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/releases/latest). Version actuelle : **1.0.0**.
+Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/releases/latest). Version actuelle : **1.1.0**.
 
 | Fichier | Pour qui | Contenu |
 |---|---|---|
-| `TACNET_APP.zip` | **Tout le monde** | L'application (`TACNET-1.0.0-portable.exe`), la licence et un guide en français. |
+| `TACNET_APP.zip` | **Tout le monde** | L'application (`TACNET-1.1.0-portable.exe`), la licence et un guide en français. |
 | `TACNET_SERV.zip` | Les plus avancés | Un serveur maison (Docker) avec son guide : domaine, HTTPS, gestion des pseudos. |
 
 Décompressez le zip puis lancez le .exe. L'application n'est pas signée : si Windows affiche « Windows a protégé votre PC », cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
+
+**Mises à jour.** Depuis la 1.1.0, TACNET regarde au démarrage (puis toutes les 6 heures) si une version plus récente est publiée sur cette page, et l'indique par un bandeau : *Télécharger* ouvre la page de la version, il suffit ensuite de remplacer l'ancien .exe par le nouveau. Rien n'est téléchargé ni installé sans votre clic, et seule la version de l'application est transmise (GitHub voit votre adresse IP, comme tout site que vous visitez). Ce réglage se désactive dans *Paramètres > À propos*. Le serveur fait de même dans son journal (`UPDATE_CHECK=off` pour le couper) : si le serveur d'un groupe n'est pas à jour, les joueurs le voient et préviennent celui qui l'héberge. La 1.0.0 n'a pas cette fonction : elle se remplace une fois à la main.
 
 ## Il faut un serveur
 
