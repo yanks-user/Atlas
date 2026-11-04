@@ -43,9 +43,13 @@ Le pas-à-pas détaillé est dans le guide (`README.html`) de `TACNET_APP.zip`. 
 
 ## Captures
 
+| La vue du gérant : canaux, joueurs et règles | Les règles d'écoute : qui entend qui |
+|---|---|
+| ![Vue du gérant avec ses canaux et ses joueurs](docs/vue-gerant.png) | ![Règles d'écoute entre les canaux Coordination, Groupe A et Groupe B](docs/regles-ecoute.png) |
+
 | Canaux masqués : ce que voit un joueur | Paramètres de la session : ce que règle le gérant |
 |---|---|
-| ![Vue limitée à son canal](docs/canaux-masques.png) | ![Paramètres de la session](docs/parametres-session.png) |
+| ![Vue d'un joueur limitée à son canal](docs/canaux-masques.png) | ![Paramètres de la session, avec l'option des canaux masqués](docs/parametres-session.png) |
 
 ## Licence
 
