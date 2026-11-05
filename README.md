@@ -20,12 +20,12 @@ TACNET est une application Windows sans installation. Une personne crée une ses
 
 ## Télécharger
 
-Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/releases/latest). Version actuelle : **1.1.0**.
+Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/releases/latest). Version actuelle : **1.2.0**.
 
 | Fichier | Pour qui | Contenu |
 |---|---|---|
 | `TACNET-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : installe TACNET pour votre compte Windows, sans droits d'administrateur, et le met à jour tout seul. |
-| `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.1.0-portable.exe`), la licence et un guide en français. |
+| `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.2.0-portable.exe`), la licence et un guide en français. |
 | `TACNET_SERV.zip` | Les plus avancés | Un serveur maison (Docker) avec son guide : domaine, HTTPS, gestion des pseudos. |
 
 Installateur : lancez-le. Version portable : décompressez le zip puis lancez le .exe. L'application n'est pas signée : si Windows affiche « Windows a protégé votre PC », cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
