@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" font-family="'Segoe UI', 'Segoe UI Variable Text', system-ui, sans-serif">
   <title>TACNET : les services tiers</title>
-  <desc>Les joueurs se connectent au serveur TACNET, hébergé sur le plan gratuit de Render, dont le disque est effacé à chaque redémarrage. Upstash, facultatif et gratuit, garde les pseudos et les sessions malgré cet effacement. La voix passe directement entre joueurs. GitHub fournit les versions et le code, et Google aide les PC à se trouver.</desc>
+  <desc>Les joueurs se connectent au serveur TACNET, hébergé sur le plan gratuit de Render, dont le disque est effacé à chaque redémarrage. Upstash, facultatif et gratuit, garde les pseudos et les sessions malgré cet effacement. La voix passe directement entre joueurs. GitHub fournit les versions et le code, et Google aide les PC à se trouver. Un serveur maison, sous Docker ou Node.js, peut remplacer Render.</desc>
   <defs>
     <marker id="aGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9z" fill="#b8c4cc"/></marker>
     <marker id="aGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9z" fill="#3ddc84"/></marker>
@@ -39,9 +39,10 @@
   <text x="620" y="358" font-size="17" font-weight="700" fill="#ffb224" text-anchor="middle">effacé à chaque redémarrage</text>
 
   <!-- ===== Serveur maison ===== -->
-  <rect x="470" y="410" width="300" height="100" rx="14" fill="#0e1418" stroke="#b49cff" stroke-width="2" stroke-dasharray="9 7"/>
-  <text x="492" y="450" font-size="22" font-weight="700" fill="#b49cff">Ou serveur maison</text>
-  <text x="492" y="480" font-size="17" fill="#8a9aa5">facultatif · disque durable</text>
+  <rect x="470" y="410" width="300" height="112" rx="14" fill="#0e1418" stroke="#b49cff" stroke-width="2" stroke-dasharray="9 7"/>
+  <text x="492" y="450" font-size="22" font-weight="700" fill="#b49cff">Ou votre serveur</text>
+  <text x="492" y="478" font-size="17" fill="#e2e9ed">Docker ou Node.js</text>
+  <text x="492" y="502" font-size="16" fill="#8a9aa5">facultatif · disque durable</text>
 
   <!-- ===== GitHub ===== -->
   <rect x="900" y="140" width="260" height="150" rx="14" fill="#0e1418" stroke="#ffb224" stroke-width="2"/>

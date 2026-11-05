@@ -29,7 +29,7 @@ Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/
 |---|---|---|
 | `TACNET-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : installe TACNET dans le dossier de votre choix, sans droits d'administrateur, et le met à jour tout seul. |
 | `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.5.1-portable.exe`), la licence et un guide en français. |
-| `TACNET_SERV.zip` | Les plus avancés | Un serveur maison (Docker) avec son guide : domaine, HTTPS, gestion des pseudos. |
+| `TACNET_SERV.zip` | Les plus avancés | Un serveur à lancer avec Node.js sous Windows (un double-clic), avec son guide Docker et Node.js : domaine, HTTPS, gestion des pseudos. |
 
 Installateur : lancez-le. Sa première page propose le dossier d'installation (`C:\Users\<votre nom>\AppData\Local\Programs\TACNET` par défaut, bouton *Parcourir* pour en choisir un autre, hors `C:\Program Files`). Version portable : décompressez le zip puis lancez le .exe.
 
@@ -39,18 +39,30 @@ Installateur : lancez-le. Sa première page propose le dossier d'installation (`
 
 ## Il faut un serveur
 
-TACNET a besoin d'un serveur pour mettre les joueurs en relation. **La méthode conseillée est de le créer gratuitement sur [Render](https://render.com)**, sans machine à laisser allumée et sans compte GitHub :
+TACNET a besoin d'un serveur pour mettre les joueurs en relation. Il y a trois façons d'en avoir un, de la plus simple à la plus libre. Dans les trois cas, les joueurs utilisent la même application : une adresse et un mot de passe.
+
+| | [Render](#render) | [Docker](#docker) | [Node.js sous Windows](#nodejs-sous-windows) |
+|---|---|---|---|
+| **Pour qui** | Personne n'a de machine à laisser allumée | Un NAS, un mini-serveur, un hébergeur (VPS) ou un PC avec Docker | Un PC Windows allumé pendant les parties, sans Docker |
+| **Il vous faut** | Un compte Render, gratuit | Docker et un seul fichier `docker-compose.yml` | Node.js et `TACNET_SERV.zip` |
+| **Les réglages** | Une variable : le mot de passe | Dans le fichier : mot de passe et port | Dans `config.env` : mot de passe et port |
+| **Vos données** | Effacées à chaque redémarrage sur le plan gratuit, sauf avec l'option Upstash | Gardées | Gardées |
+| **Chiffrement** | Automatique, sans empreinte | Certificat auto-signé avec empreinte, ou domaine avec HTTPS | Comme Docker |
+
+### Render
+
+**C'est la méthode conseillée pour commencer** : gratuite, sans machine à laisser allumée et sans compte GitHub. Créez le serveur sur [Render](https://render.com) :
 
 1. Sur Render : **New +**, **Web Service**, **Public Git Repository**, puis collez `https://github.com/yanks-user/TACNET-SERVER-RENDER`.
 2. Réglez *Language* sur **Docker**, laissez *Root Directory* et *Dockerfile Path* vides, et choisissez le plan **Free**.
 3. Ajoutez la variable d'environnement `SERVER_PASSWORD` (le mot de passe de votre groupe, 8 caractères minimum), puis lancez le déploiement.
 4. Donnez aux joueurs l'adresse `wss://nom-du-service.onrender.com` et le mot de passe.
 
-Le pas-à-pas détaillé est dans le guide (`README.html`) de `TACNET_APP.zip`. Le dépôt [TACNET-SERVER-RENDER](https://github.com/yanks-user/TACNET-SERVER-RENDER) contient ce que Render déploie.
+Le pas-à-pas détaillé est dans le guide (`README.html`) de `TACNET_APP.zip`. Le dépôt [TACNET-SERVER-RENDER](https://github.com/yanks-user/TACNET-SERVER-RENDER) contient ce que Render déploie, et ce que Docker construit plus bas.
 
-> **Plan gratuit de Render :** le serveur s'endort après 15 minutes sans activité (le réveil prend environ une minute) et ses données, pseudos réservés et sessions gardées, sont effacées à chaque redémarrage, redéploiement et mise en veille. C'est une limite du plan gratuit de Render, pas de TACNET. **Une option gratuite, [Upstash](https://upstash.com), permet de garder ces données** : deux variables à ajouter dans Render, expliquées juste en dessous. Pour un serveur permanent, vous pouvez aussi choisir un plan payant de Render, ou le serveur maison de `TACNET_SERV.zip`.
+> **Plan gratuit de Render :** le serveur s'endort après 15 minutes sans activité (le réveil prend environ une minute) et ses données, pseudos réservés et sessions gardées, sont effacées à chaque redémarrage, redéploiement et mise en veille. C'est une limite du plan gratuit de Render, pas de TACNET. **Une option gratuite, [Upstash](https://upstash.com), permet de garder ces données** : deux variables à ajouter dans Render, expliquées juste en dessous. Pour un serveur permanent, vous pouvez aussi choisir un plan payant de Render, ou l'une des deux façons ci-dessous (Docker, Node.js), où les données sont gardées.
 
-### Garder les pseudos et les sessions (facultatif)
+#### Garder les pseudos et les sessions (facultatif)
 
 Sans cette option, rien ne change. Avec elle, le serveur copie ses pseudos réservés, ses codes de session et ses sessions gardées chez [Upstash](https://upstash.com), un petit service en ligne gratuit (environ 256 Mo et 500 000 commandes par mois d'après Upstash), et les y retrouve après chaque redémarrage, mise à jour ou mise en veille.
 
@@ -61,6 +73,66 @@ Sans cette option, rien ne change. Avec elle, le serveur copie ses pseudos rése
 
 À savoir : le serveur doit être en version 1.3.0 ou plus récente (*Manual Deploy*, puis *Deploy latest commit*). Le jeton (`UPSTASH_REDIS_REST_TOKEN`) est un mot de passe : ne le partagez pas. Prévoyez une base par serveur, ou un `UPSTASH_KEY_PREFIX` différent pour chacun. Seuls les pseudos réservés, les codes de session et les sessions gardées sont conservés : après un redémarrage, les joueurs connectés se reconnectent. Upstash est un service tiers : il reçoit les pseudos, les noms de session et des empreintes de jetons, jamais le mot de passe du serveur ni la voix.
 
+### Docker
+
+Pour un NAS, un mini-serveur, un hébergeur (VPS) ou un PC : tout ce qui fait tourner Docker Compose. **Il n'y a rien à télécharger** : Docker construit le serveur lui-même depuis le [dépôt public](https://github.com/yanks-user/TACNET-SERVER-RENDER), comme Render. Installez [Docker](https://docs.docker.com/get-docker/), puis créez un seul fichier, `docker-compose.yml`, dans un dossier vide :
+
+```yaml
+# Serveur TACNET : le seul fichier à créer
+services:
+  tacnet:
+    # Construit depuis le dépôt public de TACNET, comme Render
+    build: https://github.com/yanks-user/TACNET-SERVER-RENDER.git
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 15s
+    ports:
+      # 1er nombre = port des joueurs ("9000:8080" pour le 9000)
+      - "8080:8080"
+    environment:
+      # Mot de passe demandé aux joueurs, 8 caractères minimum
+      SERVER_PASSWORD: "changez-moi-svp"
+      # Derrière un reverse proxy (HTTPS) : retirez les deux #
+      # TLS: "off"
+      # TRUST_PROXY: "true"
+    volumes:
+      # Pseudos, codes, sessions et certificat : survivent aux mises à jour
+      - tacnet-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  tacnet-data:
+```
+
+Remplacez le mot de passe (8 caractères minimum), puis, dans ce dossier :
+
+```
+docker compose up -d --build
+```
+
+1. Relevez l'empreinte du certificat avec `docker compose logs tacnet` (ligne « Empreinte du certificat »).
+2. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte.
+3. Ouvrez le port 8080 (ou celui que vous avez choisi en changeant le premier nombre de `ports`), et redirigez-le depuis votre box pour jouer hors de votre réseau.
+
+Pour mettre à jour : `docker compose build --no-cache`, puis `docker compose up -d`. Pseudos, sessions et certificat restent dans le volume Docker. Le fichier contient le mot de passe en clair : ne le partagez pas. Un nom de domaine avec HTTPS est possible derrière un reverse proxy : voir le guide.
+
+### Node.js sous Windows
+
+Sans Docker, sur un PC Windows allumé pendant les parties :
+
+1. Installez la version LTS de [Node.js](https://nodejs.org).
+2. Décompressez `TACNET_SERV.zip` (page des [Releases](https://github.com/yanks-user/TACNET/releases/latest)) où vous voulez.
+3. Double-cliquez sur `demarrer-serveur.cmd` : il installe les composants du serveur, crée `config.env` et l'ouvre dans le Bloc-notes. Remplissez `SERVER_PASSWORD` (8 caractères minimum), enregistrez, fermez.
+4. Double-cliquez de nouveau sur `demarrer-serveur.cmd`, autorisez Node.js dans le pare-feu Windows s'il le demande, et **laissez la fenêtre ouverte** pendant les parties : l'empreinte à donner aux joueurs s'y affiche.
+5. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte, et ouvrez ou redirigez le port 8080 comme pour Docker.
+
+Le guide (`README.html`) de `TACNET_SERV.zip` détaille Docker et Node.js : mise à jour, sauvegarde, autre port, nom de domaine avec HTTPS, pseudos bloqués.
+
 ## Les services tiers
 
 TACNET s'appuie sur quelques services extérieurs. Le schéma montre le rôle de chacun, le tableau ce qu'il voit.
@@ -69,11 +141,11 @@ TACNET s'appuie sur quelques services extérieurs. Le schéma montre le rôle de
 
 | Service | À quoi il sert | Obligatoire ? | Ce qu'il voit | Coût |
 |---|---|---|---|---|
-| **GitHub** | Héberge cette page, les versions de TACNET et le code que Render déploie. | Pour télécharger TACNET et créer le serveur sur Render. La recherche de mises à jour se désactive. | Votre adresse IP et la version de l'application, comme tout site que vous visitez. | Gratuit |
-| **Render** | Héberge le serveur TACNET, qui met les joueurs en relation. | Non : un serveur maison convient aussi. | Les échanges avec le serveur : Render déchiffre la connexion, il voit donc ce qui s'y échange (pseudos, sessions, et le mot de passe du serveur à la connexion). Jamais la voix. | Plan gratuit : le disque est effacé à chaque redémarrage |
+| **GitHub** | Héberge cette page, les versions de TACNET et le code du serveur que Render ou Docker construisent. | Pour télécharger TACNET et créer le serveur sur Render ou Docker. La recherche de mises à jour se désactive. | Votre adresse IP et la version de l'application, comme tout site que vous visitez. | Gratuit |
+| **Render** | Héberge le serveur TACNET, qui met les joueurs en relation. | Non : Docker ou Node.js conviennent aussi. | Les échanges avec le serveur : Render déchiffre la connexion, il voit donc ce qui s'y échange (pseudos, sessions, et le mot de passe du serveur à la connexion). Jamais la voix. | Plan gratuit : le disque est effacé à chaque redémarrage |
 | **Upstash** | Garde les pseudos, les codes de session et les sessions quand le disque de Render est effacé. | Non, facultatif. | Les pseudos, les noms de session et des empreintes de jetons. Jamais le mot de passe du serveur ni la voix. | Plan gratuit |
 | **STUN de Google** | Aide les PC à se trouver pour que la voix passe en direct. | Par défaut. L'adresse se change dans le fichier de configuration. | Votre adresse IP et votre port, quand vous rejoignez une session. Jamais la voix. | Gratuit |
-| **Serveur maison** | Remplace Render, avec un disque durable (voir `TACNET_SERV.zip`). | Non, facultatif. | Rien d'extérieur : c'est vous qui l'hébergez. | À votre charge |
+| **Votre propre serveur** | Remplace Render, avec un disque durable : Docker (NAS, mini-serveur, hébergeur) ou Node.js sous Windows. | Non, facultatif. | Rien d'extérieur : c'est vous qui l'hébergez. | À votre charge |
 
 La voix ne passe par aucun de ces services : elle circule directement entre les joueurs. Un relais TURN peut s'ajouter en option pour les réseaux qui bloquent les connexions directes (voir le guide).
 
