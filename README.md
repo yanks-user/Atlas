@@ -4,7 +4,7 @@
 
 **Communication vocale par sessions : parlez en groupe, canal par canal, comme avec une radio.**
 
-TACNET est une application Windows sans installation. Une personne crée une session et partage un code de 4 caractères ; les autres la rejoignent et choisissent leur canal. Le serveur ne fait que mettre les joueurs en relation : la voix circule directement entre eux.
+TACNET est une application Windows. Une personne crée une session et partage un code de 4 caractères ; les autres la rejoignent et choisissent leur canal. Le serveur ne fait que mettre les joueurs en relation : la voix circule directement entre eux.
 
 ![Vue d'un joueur dans TACNET](docs/vue-joueur.png)
 
