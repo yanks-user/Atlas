@@ -24,7 +24,7 @@ Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/
 
 | Fichier | Pour qui | Contenu |
 |---|---|---|
-| `TACNET-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : installe TACNET pour votre compte Windows, sans droits d'administrateur, et le met à jour tout seul. |
+| `TACNET-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : installe TACNET, sans droits d'administrateur, et le met à jour tout seul. |
 | `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.2.0-portable.exe`), la licence et un guide en français. |
 | `TACNET_SERV.zip` | Les plus avancés | Un serveur maison (Docker) avec son guide : domaine, HTTPS, gestion des pseudos. |
 
