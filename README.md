@@ -16,7 +16,7 @@ TACNET est une application Windows sans installation. Une personne crée une ses
 - **Mode Half-Duplex** : un seul émetteur à la fois vers un canal.
 - **Canaux masqués** : chaque joueur ne voit que son propre canal, idéal pour garder le secret des équipes (exemple du Loup-Garou plus bas).
 - **Mises à jour signalées** : un bandeau prévient quand une nouvelle version est publiée, et quand le serveur n'est pas à jour, pour que son hébergeur le sache.
-- **Léger** : Windows 64 bits, un seul fichier .exe, sans installation.
+- **Installateur ou portable** : Windows 64 bits, un installateur qui met TACNET à jour tout seul, ou un seul fichier .exe sans installation.
 
 ## Télécharger
 
@@ -24,12 +24,15 @@ Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/
 
 | Fichier | Pour qui | Contenu |
 |---|---|---|
-| `TACNET_APP.zip` | **Tout le monde** | L'application (`TACNET-1.1.0-portable.exe`), la licence et un guide en français. |
+| `TACNET-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : installe TACNET pour votre compte Windows, sans droits d'administrateur, et le met à jour tout seul. |
+| `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.1.0-portable.exe`), la licence et un guide en français. |
 | `TACNET_SERV.zip` | Les plus avancés | Un serveur maison (Docker) avec son guide : domaine, HTTPS, gestion des pseudos. |
 
-Décompressez le zip puis lancez le .exe. L'application n'est pas signée : si Windows affiche « Windows a protégé votre PC », cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
+Installateur : lancez-le. Version portable : décompressez le zip puis lancez le .exe. L'application n'est pas signée : si Windows affiche « Windows a protégé votre PC », cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
 
-**Mises à jour.** Depuis la 1.1.0, TACNET regarde au démarrage (puis toutes les 6 heures) si une version plus récente est publiée sur cette page, et l'indique par un bandeau : *Télécharger* ouvre la page de la version, il suffit ensuite de remplacer l'ancien .exe par le nouveau. Rien n'est téléchargé ni installé sans votre clic, et seule la version de l'application est transmise (GitHub voit votre adresse IP, comme tout site que vous visitez). Ce réglage se désactive dans *Paramètres > À propos*. Le serveur fait de même dans son journal (`UPDATE_CHECK=off` pour le couper) : si le serveur d'un groupe n'est pas à jour, les joueurs le voient et préviennent celui qui l'héberge. La 1.0.0 n'a pas cette fonction : elle se remplace une fois à la main.
+**Mises à jour.** Depuis la 1.1.0, TACNET regarde au démarrage (puis toutes les 6 heures) si une version plus récente est publiée sur cette page, et l'indique par un bandeau : *Télécharger* ouvre la page de la version, il suffit ensuite de remplacer l'ancien .exe par le nouveau. **Avec l'installateur**, le bouton devient *Mettre à jour* : TACNET télécharge la version, puis *Redémarrer et installer* la met en place et rouvre TACNET. Rien n'est téléchargé ni installé sans votre clic, et seule la version de l'application est transmise (GitHub voit votre adresse IP, comme tout site que vous visitez). Ce réglage se désactive dans *Paramètres > À propos*. Le serveur fait de même dans son journal (`UPDATE_CHECK=off` pour le couper) : si le serveur d'un groupe n'est pas à jour, les joueurs le voient et préviennent celui qui l'héberge. La 1.0.0 n'a pas cette fonction : elle se remplace une fois à la main.
+
+**Installateur ou portable ?** Les réglages de l'application installée (adresse du serveur, touches, audio) sont dans `%APPDATA%\TACNET`, et survivent aux mises à jour. En venant de la version portable, ressaisissez l'adresse du serveur et vos touches une fois : le mot de passe du serveur, vos pseudos réservés et vos sessions sauvegardées sont repris. Choisissez l'une ou l'autre version. Pour désinstaller : *Paramètres Windows > Applications > TACNET*.
 
 ## Il faut un serveur
 
