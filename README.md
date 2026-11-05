@@ -15,6 +15,7 @@ TACNET est une application Windows. Une personne crée une session et partage un
 - **Rôles** : gérant, adjoint, joueur, auditeur, et des rôles personnalisés réglés option par option.
 - **Mode Half-Duplex** : un seul émetteur à la fois vers un canal.
 - **Canaux masqués** : chaque joueur ne voit que son propre canal, idéal pour garder le secret des équipes (exemple du Loup-Garou plus bas).
+- **Fenêtre épinglable et réductible** : le pin de la barre de titre garde TACNET au-dessus des autres fenêtres, et la fenêtre peut se réduire jusqu'à ne montrer que les canaux et ceux qui y sont.
 - **Mises à jour signalées** : un bandeau prévient quand une nouvelle version est publiée, et quand le serveur n'est pas à jour, pour que son hébergeur le sache.
 - **Installateur ou portable** : Windows 64 bits, un installateur qui met TACNET à jour tout seul, ou un seul fichier .exe sans installation.
 
