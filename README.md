@@ -45,7 +45,7 @@ TACNET a besoin d'un serveur pour mettre les joueurs en relation. **La méthode 
 
 Le pas-à-pas détaillé est dans le guide (`README.html`) de `TACNET_APP.zip`. Le dépôt [TACNET-SERVER-RENDER](https://github.com/yanks-user/TACNET-SERVER-RENDER) contient ce que Render déploie.
 
-> **Plan gratuit de Render :** le serveur s'endort après 15 minutes sans activité (le réveil prend environ une minute) et ses données, pseudos réservés et sessions gardées, sont effacées à chaque redémarrage. Pour un serveur permanent, choisissez un plan payant de Render, ou le serveur maison de `TACNET_SERV.zip`.
+> **Plan gratuit de Render :** le serveur s'endort après 15 minutes sans activité (le réveil prend environ une minute) et ses données, pseudos réservés et sessions gardées, sont effacées à chaque redémarrage, redéploiement et mise en veille. C'est une limite du plan gratuit de Render, pas de TACNET. **Une option gratuite, [Upstash](https://upstash.com), permet de garder ces données** : deux variables à ajouter dans Render, expliquées dans le guide de `TACNET_APP.zip` (« Garder les pseudos et les sessions »). Pour un serveur permanent, vous pouvez aussi choisir un plan payant de Render, ou le serveur maison de `TACNET_SERV.zip`.
 
 ## Captures
 
