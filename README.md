@@ -15,7 +15,7 @@ Une application Windows pour les parties de jeu en équipe, les soirées, les r�
 - **Half-Duplex et RAD prioritaire** : un seul émetteur à la fois vers un canal, et des canaux prioritaires qui peuvent couper la parole.
 - **Overlay en jeu** : maintenez une touche, tournez la molette, relâchez : vous changez de canal sans quitter le jeu.
 - **Canaux masqués** : chacun ne voit que son canal, pour garder un secret (exemple plus bas).
-- **À votre façon** : rôles, quatre thèmes, bips et effet radio personnels, fenêtre épinglable et réductible.
+- **À votre façon** : rôles, bips et effet radio personnels, fenêtre épinglable et réductible.
 
 ## Télécharger
 
@@ -160,10 +160,6 @@ TACNET s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur R
 | La vue du gérant | Qui parle à qui |
 |---|---|
 | ![Vue du gérant avec ses canaux et ses joueurs](docs/vue-gerant.jpg) | ![Tableau « Qui parle à qui » entre les canaux Coordination, Groupe A et Groupe B](docs/qui-parle-a-qui.jpg) |
-
-Quatre thèmes, au choix dans *Paramètres > Personnalisation* : Sombre, Clair, Vert et Bleu.
-
-![La même session dans les quatre thèmes](docs/themes.jpg)
 
 L'overlay des canaux, en jeu : maintenez la touche, la molette choisit, relâcher y emmène.
 
