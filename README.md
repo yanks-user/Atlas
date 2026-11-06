@@ -74,9 +74,6 @@ nano docker-compose.yml
 
 Collez le contenu ci-dessous et remplacez le mot de passe (8 caractères minimum). Enregistrez avec **Ctrl+O** puis **Entrée**, et quittez avec **Ctrl+X**.
 
-<details>
-<summary>Le contenu de <code>docker-compose.yml</code></summary>
-
 ```yaml
 # Serveur TACNET : le seul fichier à créer
 #
@@ -112,8 +109,6 @@ services:
 volumes:
   tacnet-data:
 ```
-
-</details>
 
 **4. Créez et lancez le serveur**, toujours dans ce dossier :
 
@@ -153,7 +148,11 @@ Pour un nom de domaine avec HTTPS, voir le [guide Domaine et HTTPS](docs/domaine
 
 ## Les services tiers
 
-TACNET s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs. [Le schéma, et ce que chaque service voit](docs/services-tiers.md).
+TACNET s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
+
+![Schéma des services tiers de TACNET : les joueurs, Render, GitHub, Upstash (facultatif) et le STUN de Google](docs/services-tiers.png)
+
+[Ce que chaque service voit, et ce qu'il coûte](docs/services-tiers.md).
 
 ## Captures
 
