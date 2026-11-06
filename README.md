@@ -6,6 +6,8 @@
 
 TACNET est une application Windows. Une personne crée une session et partage un code de 4 caractères ; les autres la rejoignent et choisissent leur canal. Le serveur ne fait que mettre les joueurs en relation : la voix circule directement entre eux.
 
+Parties de jeu en équipe, soirées, réunions, événements : TACNET sert dès qu'il faut parler à plusieurs, par petits groupes.
+
 ![Vue d'un joueur dans TACNET](docs/vue-joueur.png)
 
 ## Ce que permet TACNET
@@ -13,7 +15,9 @@ TACNET est une application Windows. Une personne crée une session et partage un
 - **Sessions et canaux** : un code à 4 caractères, des canaux créés par le gérant, et un tableau **Qui parle à qui** pour choisir à quels canaux chaque canal parle.
 - **Parler comme à la radio** : la **RAD** (radio) vers son canal (Int), vers les canaux reliés (Ext), vers toute la session (Général) ou vers un seul canal. Les touches se règlent et fonctionnent même quand une autre fenêtre, un jeu par exemple, est au premier plan.
 - **Rôles** : gérant, adjoint, joueur, auditeur, et des rôles personnalisés réglés option par option.
-- **Mode Half-Duplex et RAD prioritaire** : un seul émetteur à la fois vers un canal. Avec l'option **RAD prioritaire**, les canaux que choisit le gérant, le commandement par exemple, coupent aussitôt la parole de celui qui occupe un canal qu'ils visent.
+- **Mode Half-Duplex et RAD prioritaire** : un seul émetteur à la fois vers un canal, c'est le mode de base d'une session (le Full-Duplex, plusieurs voix en même temps, reste possible). Avec l'option **RAD prioritaire**, les canaux que choisit le gérant, la coordination par exemple, coupent aussitôt la parole de celui qui occupe un canal qu'ils visent.
+- **Overlay des canaux en jeu** : maintenez une touche, faites défiler la molette, relâchez, et vous changez de canal sans quitter le jeu.
+- **À votre façon** : quatre thèmes (Sombre, Clair, Vert, Bleu), des bips radio et un effet radio sur les voix que chacun active pour lui seul, et des notifications que l'on peut couper.
 - **Canaux masqués** : chaque joueur ne voit que son propre canal, idéal pour garder le secret des équipes (exemple du Loup-Garou plus bas).
 - **Fenêtre épinglable et réductible** : le pin de la barre de titre garde TACNET au-dessus des autres fenêtres, et la fenêtre peut se réduire jusqu'à ne montrer que les canaux et ceux qui y sont.
 - **Mises à jour signalées** : un bandeau prévient quand une nouvelle version est publiée, et quand le serveur n'est pas à jour, pour que son hébergeur le sache.
@@ -118,6 +122,10 @@ Pour un NAS, un mini-serveur, un hébergeur (VPS) ou un PC : tout ce qui fait to
 
    ```yaml
    # Serveur TACNET : le seul fichier à créer
+   #
+   # Pour mettre à jour le serveur proprement (deux commandes, dans le dossier de ce fichier) :
+   #   docker compose build --no-cache
+   #   docker compose up -d
    services:
      tacnet:
        # Construit depuis le dépôt public de TACNET, comme Render
@@ -162,7 +170,14 @@ Il reste à donner l'accès aux joueurs :
 2. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte.
 3. Ouvrez le port 8080 (ou celui que vous avez choisi en changeant le premier nombre de `ports`), et redirigez-le depuis votre box pour jouer hors de votre réseau.
 
-Pour mettre à jour : `docker compose build --no-cache`, puis `docker compose up -d`. Pseudos, sessions et certificat restent dans le volume Docker. Le fichier contient le mot de passe en clair : ne le partagez pas.
+**Pour mettre à jour**, deux commandes, dans le dossier du serveur (elles sont aussi écrites en commentaire en haut du fichier) :
+
+```
+docker compose build --no-cache
+docker compose up -d
+```
+
+Pas de `docker compose pull` ici : le serveur est construit depuis GitHub, il n'y a pas d'image toute faite à télécharger. Pseudos, sessions et certificat restent dans le volume Docker. Le fichier contient le mot de passe en clair : ne le partagez pas.
 
 **Un nom de domaine avec HTTPS** (une adresse simple, et plus d'empreinte à donner) : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md). Il ajoute Caddy à ce même fichier, mais n'importe quel autre reverse proxy (Nginx, Traefik…) convient aussi, et le guide l'explique.
 
@@ -207,6 +222,18 @@ La voix ne passe par aucun de ces services : elle circule directement entre les 
 | RAD prioritaire : le gérant choisit les canaux prioritaires | Ce que voit celui dont la parole est coupée |
 |---|---|
 | ![Fenêtre « RAD prioritaire » : le canal Coordination est prioritaire](docs/rad-prioritaire.png) | ![Un joueur du Groupe A coupé par le canal Coordination : bouton « Occupé », message et journal radio](docs/rad-coupure.png) |
+
+**Quatre thèmes**, au choix dans *Paramètres > Personnalisation* : Sombre, Clair, Vert et Bleu. Le thème change tout de suite, et chacun choisit le sien.
+
+![La même session dans les quatre thèmes : Sombre, Clair, Vert et Bleu](docs/themes.png)
+
+| Paramètres > Personnalisation : thème, bips et effet radio | Paramètres > Overlay : la touche à maintenir en jeu |
+|---|---|
+| ![Paramètres, catégorie Personnalisation : les quatre thèmes, les bips radio et l'effet radio sur les voix](docs/parametres-personnalisation.png) | ![Paramètres, catégorie Overlay : touche de l'overlay, position et aperçu](docs/parametres-overlay.png) |
+
+**L'overlay des canaux en jeu.** En maintenant la touche choisie, la liste des canaux s'affiche par-dessus le jeu (ici sur un fond neutre) : la molette choisit un canal, et relâcher la touche y emmène. La notification « qui parle » apparaît en bas à droite, et elle se coupe dans les paramètres.
+
+![L'overlay des canaux à gauche de l'écran, avec la notification « qui parle » en bas à droite, sur un fond neutre](docs/overlay-en-jeu.png)
 
 ## Exemple : le Loup-Garou à 10 joueurs
 

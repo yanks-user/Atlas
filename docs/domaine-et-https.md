@@ -58,6 +58,11 @@ nano docker-compose.yml
 
 ```yaml
 # Serveur TACNET + Caddy (domaine et HTTPS) : le seul fichier à changer
+#
+# Pour mettre à jour le serveur proprement (deux commandes, dans le dossier de ce fichier) :
+#   docker compose build --no-cache
+#   docker compose up -d
+# (Pour mettre à jour Caddy aussi, ajoutez « docker compose pull » avant la seconde.)
 services:
   tacnet:
     # Construit depuis le dépôt public de TACNET, comme Render
