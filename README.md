@@ -10,10 +10,10 @@ TACNET est une application Windows. Une personne crée une session et partage un
 
 ## Ce que permet TACNET
 
-- **Sessions et canaux** : un code à 4 caractères, des canaux créés par le gérant, des règles d'écoute (« ce canal entend celui-là »).
-- **Parler comme à la radio** : Push To Talk vers son canal (Int), vers les canaux reliés (Ext), vers toute la session (Général) ou vers un seul canal. Les touches se règlent et fonctionnent même quand une autre fenêtre, un jeu par exemple, est au premier plan.
+- **Sessions et canaux** : un code à 4 caractères, des canaux créés par le gérant, et un tableau **Qui parle à qui** pour choisir à quels canaux chaque canal parle.
+- **Parler comme à la radio** : le **RAD** (radio) vers son canal (Int), vers les canaux reliés (Ext), vers toute la session (Général) ou vers un seul canal. Les touches se règlent et fonctionnent même quand une autre fenêtre, un jeu par exemple, est au premier plan.
 - **Rôles** : gérant, adjoint, joueur, auditeur, et des rôles personnalisés réglés option par option.
-- **Mode Half-Duplex** : un seul émetteur à la fois vers un canal.
+- **Mode Half-Duplex et RAD prioritaire** : un seul émetteur à la fois vers un canal. Avec l'option **RAD prioritaire**, les canaux que choisit le gérant, le commandement par exemple, coupent aussitôt la parole de celui qui occupe un canal qu'ils visent.
 - **Canaux masqués** : chaque joueur ne voit que son propre canal, idéal pour garder le secret des équipes (exemple du Loup-Garou plus bas).
 - **Fenêtre épinglable et réductible** : le pin de la barre de titre garde TACNET au-dessus des autres fenêtres, et la fenêtre peut se réduire jusqu'à ne montrer que les canaux et ceux qui y sont.
 - **Mises à jour signalées** : un bandeau prévient quand une nouvelle version est publiée, et quand le serveur n'est pas à jour, pour que son hébergeur le sache.
@@ -47,7 +47,7 @@ TACNET a besoin d'un serveur pour mettre les joueurs en relation. Il y a trois f
 | **Il vous faut** | Un compte Render, gratuit | Docker et un seul fichier `docker-compose.yml` | Node.js et `TACNET_SERV.zip` |
 | **Les réglages** | Une variable : le mot de passe | Dans le fichier : mot de passe et port | Dans `config.env` : mot de passe et port |
 | **Vos données** | Effacées à chaque redémarrage sur le plan gratuit, sauf avec l'option Upstash | Gardées | Gardées |
-| **Chiffrement** | Automatique, sans empreinte | Certificat auto-signé avec empreinte, ou domaine avec HTTPS | Comme Docker |
+| **Chiffrement** | Automatique, sans empreinte | Certificat auto-signé avec empreinte, ou [domaine avec HTTPS](docs/domaine-et-https.md) | Comme Docker |
 
 ### Render
 
@@ -75,51 +75,73 @@ Sans cette option, rien ne change. Avec elle, le serveur copie ses pseudos rése
 
 ### Docker
 
-Pour un NAS, un mini-serveur, un hébergeur (VPS) ou un PC : tout ce qui fait tourner Docker Compose. **Il n'y a rien à télécharger** : Docker construit le serveur lui-même depuis le [dépôt public](https://github.com/yanks-user/TACNET-SERVER-RENDER), comme Render. Installez [Docker](https://docs.docker.com/get-docker/), puis créez un seul fichier, `docker-compose.yml`, dans un dossier vide :
+Pour un NAS, un mini-serveur, un hébergeur (VPS) ou un PC : tout ce qui fait tourner Docker Compose. **Il n'y a rien à télécharger** : Docker construit le serveur lui-même depuis le [dépôt public](https://github.com/yanks-user/TACNET-SERVER-RENDER), comme Render. Il suffit de créer un dossier et un seul fichier, en quatre étapes.
 
-```yaml
-# Serveur TACNET : le seul fichier à créer
-services:
-  tacnet:
-    # Construit depuis le dépôt public de TACNET, comme Render
-    build: https://github.com/yanks-user/TACNET-SERVER-RENDER.git
-    restart: unless-stopped
-    init: true
-    stop_grace_period: 15s
-    ports:
-      # 1er nombre = port des joueurs ("9000:8080" pour le 9000)
-      - "8080:8080"
-    environment:
-      # Mot de passe demandé aux joueurs, 8 caractères minimum
-      SERVER_PASSWORD: "changez-moi-svp"
-      # Derrière un reverse proxy (HTTPS) : retirez les deux #
-      # TLS: "off"
-      # TRUST_PROXY: "true"
-    volumes:
-      # Pseudos, codes, sessions et certificat : survivent aux mises à jour
-      - tacnet-data:/data
-    read_only: true
-    tmpfs:
-      - /tmp
-    cap_drop:
-      - ALL
-    security_opt:
-      - no-new-privileges:true
-volumes:
-  tacnet-data:
-```
+1. **Installez [Docker](https://docs.docker.com/get-docker/)** sur la machine qui restera allumée : Docker Desktop sous Windows ou Mac, Docker Engine avec Compose sous Linux. Un NAS le propose souvent parmi ses applications.
+2. **Créez un dossier pour le serveur.** Ouvrez un terminal (une connexion SSH sur un NAS ou un hébergeur, par exemple `ssh utilisateur@adresse-du-serveur` ; PowerShell sous Windows), créez le dossier, puis placez-vous dedans. Le nom est libre :
 
-Remplacez le mot de passe (8 caractères minimum), puis, dans ce dossier :
+   ```
+   mkdir tacnet-serveur
+   cd tacnet-serveur
+   ```
 
-```
-docker compose up -d --build
-```
+3. **Créez et réglez le fichier.** Cette commande crée `docker-compose.yml` et l'ouvre dans l'éditeur nano :
+
+   ```
+   nano docker-compose.yml
+   ```
+
+   Collez le contenu ci-dessous (clic droit, ou Maj+Inser, dans la plupart des terminaux) et remplacez le mot de passe (8 caractères minimum). Enregistrez avec **Ctrl+O** puis **Entrée**, et quittez avec **Ctrl+X**. Sous Windows, `notepad docker-compose.yml` ouvre le Bloc-notes à la place.
+
+   ```yaml
+   # Serveur TACNET : le seul fichier à créer
+   services:
+     tacnet:
+       # Construit depuis le dépôt public de TACNET, comme Render
+       build: https://github.com/yanks-user/TACNET-SERVER-RENDER.git
+       restart: unless-stopped
+       init: true
+       stop_grace_period: 15s
+       ports:
+         # 1er nombre = port des joueurs ("9000:8080" pour le 9000)
+         - "8080:8080"
+       environment:
+         # Mot de passe demandé aux joueurs, 8 caractères minimum
+         SERVER_PASSWORD: "changez-moi-svp"
+         # Derrière un reverse proxy (HTTPS) : retirez les deux #
+         # TLS: "off"
+         # TRUST_PROXY: "true"
+       volumes:
+         # Pseudos, codes, sessions et certificat : survivent aux mises à jour
+         - tacnet-data:/data
+       read_only: true
+       tmpfs:
+         - /tmp
+       cap_drop:
+         - ALL
+       security_opt:
+         - no-new-privileges:true
+   volumes:
+     tacnet-data:
+   ```
+
+4. **Créez et lancez le serveur**, toujours dans ce dossier :
+
+   ```
+   docker compose up -d --build
+   ```
+
+   `--build` construit le serveur (une à deux minutes la première fois) et `-d` le lance en arrière-plan : vous pouvez fermer le terminal.
+
+Il reste à donner l'accès aux joueurs :
 
 1. Relevez l'empreinte du certificat avec `docker compose logs tacnet` (ligne « Empreinte du certificat »).
 2. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte.
 3. Ouvrez le port 8080 (ou celui que vous avez choisi en changeant le premier nombre de `ports`), et redirigez-le depuis votre box pour jouer hors de votre réseau.
 
-Pour mettre à jour : `docker compose build --no-cache`, puis `docker compose up -d`. Pseudos, sessions et certificat restent dans le volume Docker. Le fichier contient le mot de passe en clair : ne le partagez pas. Un nom de domaine avec HTTPS est possible derrière un reverse proxy : voir le guide.
+Pour mettre à jour : `docker compose build --no-cache`, puis `docker compose up -d`. Pseudos, sessions et certificat restent dans le volume Docker. Le fichier contient le mot de passe en clair : ne le partagez pas.
+
+**Un nom de domaine avec HTTPS** (une adresse simple, et plus d'empreinte à donner) : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md), qui ajoute Caddy à ce même fichier.
 
 ### Node.js sous Windows
 
@@ -131,7 +153,7 @@ Sans Docker, sur un PC Windows allumé pendant les parties :
 4. Double-cliquez de nouveau sur `demarrer-serveur.cmd`, autorisez Node.js dans le pare-feu Windows s'il le demande, et **laissez la fenêtre ouverte** pendant les parties : l'empreinte à donner aux joueurs s'y affiche.
 5. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte, et ouvrez ou redirigez le port 8080 comme pour Docker.
 
-Le guide (`README.html`) de `TACNET_SERV.zip` détaille Docker et Node.js : mise à jour, sauvegarde, autre port, nom de domaine avec HTTPS, pseudos bloqués.
+**Un nom de domaine avec HTTPS** : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md). Le guide (`README.html`) de `TACNET_SERV.zip` détaille Docker et Node.js : mise à jour, sauvegarde, autre port, pseudos bloqués.
 
 ## Les services tiers
 
@@ -151,13 +173,17 @@ La voix ne passe par aucun de ces services : elle circule directement entre les 
 
 ## Captures
 
-| La vue du gérant : canaux, joueurs et règles | Les règles d'écoute : qui entend qui |
+| La vue du gérant : canaux, joueurs et règles | Qui parle à qui : à quels canaux chaque canal parle |
 |---|---|
-| ![Vue du gérant avec ses canaux et ses joueurs](docs/vue-gerant.png) | ![Règles d'écoute entre les canaux Coordination, Groupe A et Groupe B](docs/regles-ecoute.png) |
+| ![Vue du gérant avec ses canaux et ses joueurs](docs/vue-gerant.png) | ![Tableau « Qui parle à qui » entre les canaux Coordination, Groupe A et Groupe B, avec son résumé en clair](docs/qui-parle-a-qui.png) |
 
 | Canaux masqués : ce que voit un joueur | Paramètres de la session : ce que règle le gérant |
 |---|---|
-| ![Vue d'un joueur limitée à son canal](docs/canaux-masques.png) | ![Paramètres de la session, avec l'option des canaux masqués](docs/parametres-session.png) |
+| ![Vue d'un joueur limitée à son canal](docs/canaux-masques.png) | ![Paramètres de la session : Half-Duplex, RAD prioritaire et canaux masqués](docs/parametres-session.png) |
+
+| RAD prioritaire : le gérant choisit les canaux prioritaires | Ce que voit celui dont la parole est coupée |
+|---|---|
+| ![Fenêtre « RAD prioritaire » : le canal Coordination est prioritaire](docs/rad-prioritaire.png) | ![Un joueur du Groupe A coupé par le canal Coordination : bouton « Occupé », message et journal radio](docs/rad-coupure.png) |
 
 ## Exemple : le Loup-Garou à 10 joueurs
 
@@ -174,7 +200,7 @@ Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup
 **Une nuit**
 
 1. Sur Discord, le narrateur annonce « Le village s'endort » : tout le monde coupe son micro.
-2. Sur TACNET, il appelle les rôles l'un après l'autre : « Les loups-garous se réveillent ». Les loups se concertent entre eux en PTT Int et le narrateur les entend, ils désignent leur victime. Puis « La voyante se réveille » : elle répond, seul le narrateur l'entend. Puis la sorcière.
+2. Sur TACNET, il appelle les rôles l'un après l'autre : « Les loups-garous se réveillent ». Les loups se concertent entre eux en RAD Int et le narrateur les entend, ils désignent leur victime. Puis « La voyante se réveille » : elle répond, seul le narrateur l'entend. Puis la sorcière.
 3. Au matin, tout le monde rouvre son micro sur Discord et le narrateur annonce la victime.
 
 | Le narrateur voit tout et appelle un rôle à la fois | Un loup voit ses complices, et le narrateur qui lui parle |
@@ -192,7 +218,7 @@ Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup
 **Bon à savoir**
 
 - Pour un rôle de nuit de plus (Cupidon, par exemple), ajoutez un canal et placez-y le joueur.
-- Le PTT Général du narrateur est entendu par tous les joueurs placés dans un canal, mais pas par les villageois hors canal vocal.
+- Le RAD Général du narrateur est entendu par tous les joueurs placés dans un canal, mais pas par les villageois hors canal vocal.
 - Utilisez un casque : sinon la voix jouée par les haut-parleurs peut repartir dans le micro d'un autre vocal.
 
 ## Licence
