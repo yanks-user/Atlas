@@ -11,7 +11,7 @@ TACNET est une application Windows. Une personne crée une session et partage un
 ## Ce que permet TACNET
 
 - **Sessions et canaux** : un code à 4 caractères, des canaux créés par le gérant, et un tableau **Qui parle à qui** pour choisir à quels canaux chaque canal parle.
-- **Parler comme à la radio** : le **RAD** (radio) vers son canal (Int), vers les canaux reliés (Ext), vers toute la session (Général) ou vers un seul canal. Les touches se règlent et fonctionnent même quand une autre fenêtre, un jeu par exemple, est au premier plan.
+- **Parler comme à la radio** : la **RAD** (radio) vers son canal (Int), vers les canaux reliés (Ext), vers toute la session (Général) ou vers un seul canal. Les touches se règlent et fonctionnent même quand une autre fenêtre, un jeu par exemple, est au premier plan.
 - **Rôles** : gérant, adjoint, joueur, auditeur, et des rôles personnalisés réglés option par option.
 - **Mode Half-Duplex et RAD prioritaire** : un seul émetteur à la fois vers un canal. Avec l'option **RAD prioritaire**, les canaux que choisit le gérant, le commandement par exemple, coupent aussitôt la parole de celui qui occupe un canal qu'ils visent.
 - **Canaux masqués** : chaque joueur ne voit que son propre canal, idéal pour garder le secret des équipes (exemple du Loup-Garou plus bas).
@@ -33,9 +33,21 @@ Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/
 
 Installateur : lancez-le. Sa première page propose le dossier d'installation (`C:\Users\<votre nom>\AppData\Local\Programs\TACNET` par défaut, bouton *Parcourir* pour en choisir un autre, hors `C:\Program Files`). Version portable : décompressez le zip puis lancez le .exe.
 
-**Mises à jour.** Depuis la 1.1.0, TACNET regarde au démarrage (puis toutes les 6 heures) si une version plus récente est publiée sur cette page, et l'indique par un bandeau : *Télécharger* ouvre la page de la version, il suffit ensuite de remplacer l'ancien .exe par le nouveau. **Avec l'installateur**, le bouton devient *Mettre à jour* : TACNET télécharge la version, puis *Redémarrer et installer* la met en place et rouvre TACNET. Rien n'est téléchargé ni installé sans votre clic, et seule la version de l'application est transmise (GitHub voit votre adresse IP, comme tout site que vous visitez). Ce réglage se désactive dans *Paramètres > À propos*. Le serveur fait de même dans son journal (`UPDATE_CHECK=off` pour le couper) : si le serveur d'un groupe n'est pas à jour, les joueurs le voient et préviennent celui qui l'héberge. La 1.0.0 n'a pas cette fonction : elle se remplace une fois à la main.
+**Mises à jour.** Depuis la 1.1.0, TACNET regarde au démarrage (puis toutes les 6 heures) si une version plus récente est publiée sur cette page, et l'indique par un bandeau.
 
-**Installateur ou portable ?** Les réglages de l'application installée (adresse du serveur, touches, audio) sont dans `%APPDATA%\TACNET`, et survivent aux mises à jour, qui gardent aussi le dossier choisi. Pour déplacer TACNET, relancez l'installateur et choisissez un autre dossier : l'ancien emplacement est retiré et vos réglages sont conservés. En venant de la version portable, ressaisissez l'adresse du serveur et vos touches une fois : le mot de passe du serveur, vos pseudos réservés et vos sessions sauvegardées sont repris. Choisissez l'une ou l'autre version. Pour désinstaller : *Paramètres Windows > Applications > TACNET*.
+- **Version portable** : *Télécharger* ouvre la page de la version, il suffit ensuite de remplacer l'ancien .exe par le nouveau.
+- **Avec l'installateur** : le bouton devient *Mettre à jour*. TACNET télécharge la version, puis *Redémarrer et installer* la met en place et rouvre TACNET.
+- **Votre accord** : rien n'est téléchargé ni installé sans votre clic. Seule la version de l'application est transmise (GitHub voit votre adresse IP, comme tout site que vous visitez).
+- **Désactiver** : *Paramètres > À propos*.
+- **Serveur** : il fait de même dans son journal (`UPDATE_CHECK=off` pour le couper). Si le serveur d'un groupe n'est pas à jour, les joueurs le voient et préviennent celui qui l'héberge.
+- **Version 1.0.0** : elle n'a pas cette fonction, elle se remplace une fois à la main.
+
+**Installateur ou portable ?** Choisissez l'une ou l'autre version : elles ne se mélangent pas.
+
+- **Vos réglages** (adresse du serveur, touches, audio) sont dans `%APPDATA%\TACNET` avec l'installateur. Ils survivent aux mises à jour, qui gardent aussi le dossier choisi.
+- **Déplacer TACNET** : relancez l'installateur et choisissez un autre dossier. L'ancien emplacement est retiré, vos réglages sont conservés.
+- **En venant de la version portable** : ressaisissez l'adresse du serveur et vos touches une fois. Le mot de passe du serveur, vos pseudos réservés et vos sessions sauvegardées sont repris.
+- **Désinstaller** : *Paramètres Windows > Applications > TACNET*.
 
 ## Il faut un serveur
 
@@ -60,7 +72,12 @@ TACNET a besoin d'un serveur pour mettre les joueurs en relation. Il y a trois f
 
 Le pas-à-pas détaillé est dans le guide (`README.html`) de `TACNET_APP.zip`. Le dépôt [TACNET-SERVER-RENDER](https://github.com/yanks-user/TACNET-SERVER-RENDER) contient ce que Render déploie, et ce que Docker construit plus bas.
 
-> **Plan gratuit de Render :** le serveur s'endort après 15 minutes sans activité (le réveil prend environ une minute) et ses données, pseudos réservés et sessions gardées, sont effacées à chaque redémarrage, redéploiement et mise en veille. C'est une limite du plan gratuit de Render, pas de TACNET. **Une option gratuite, [Upstash](https://upstash.com), permet de garder ces données** : deux variables à ajouter dans Render, expliquées juste en dessous. Pour un serveur permanent, vous pouvez aussi choisir un plan payant de Render, ou l'une des deux façons ci-dessous (Docker, Node.js), où les données sont gardées.
+> **Plan gratuit de Render : ce n'est pas un serveur permanent.**
+>
+> - Le serveur s'endort après 15 minutes sans activité. Le réveil prend environ une minute.
+> - Ses données (pseudos réservés, sessions gardées) sont effacées à chaque redémarrage, redéploiement et mise en veille. C'est une limite du plan gratuit de Render, pas de TACNET.
+> - **Une option gratuite, [Upstash](https://upstash.com), garde ces données** : deux variables à ajouter dans Render, expliquées juste en dessous.
+> - Pour un serveur permanent : un plan payant de Render, ou l'une des deux façons ci-dessous (Docker, Node.js), où les données sont gardées.
 
 #### Garder les pseudos et les sessions (facultatif)
 
@@ -71,7 +88,13 @@ Sans cette option, rien ne change. Avec elle, le serveur copie ses pseudos rése
 3. Dans Render, onglet **Environment** de votre service, ajoutez ces deux variables, avec les mêmes noms, puis enregistrez. Render relance le serveur.
 4. Vérifiez : l'onglet **Logs** affiche « Stockage durable Upstash : actif ».
 
-À savoir : le serveur doit être en version 1.3.0 ou plus récente (*Manual Deploy*, puis *Deploy latest commit*). Le jeton (`UPSTASH_REDIS_REST_TOKEN`) est un mot de passe : ne le partagez pas. Prévoyez une base par serveur, ou un `UPSTASH_KEY_PREFIX` différent pour chacun. Seuls les pseudos réservés, les codes de session et les sessions gardées sont conservés : après un redémarrage, les joueurs connectés se reconnectent. Upstash est un service tiers : il reçoit les pseudos, les noms de session et des empreintes de jetons, jamais le mot de passe du serveur ni la voix.
+**À savoir**
+
+- Le serveur doit être en version 1.3.0 ou plus récente (*Manual Deploy*, puis *Deploy latest commit*).
+- Le jeton (`UPSTASH_REDIS_REST_TOKEN`) est un mot de passe : ne le partagez pas.
+- Prévoyez une base par serveur, ou un `UPSTASH_KEY_PREFIX` différent pour chacun.
+- Seuls les pseudos réservés, les codes de session et les sessions gardées sont conservés. Après un redémarrage, les joueurs connectés se reconnectent.
+- Upstash est un service tiers : il reçoit les pseudos, les noms de session et des empreintes de jetons, jamais le mot de passe du serveur ni la voix.
 
 ### Docker
 
@@ -141,7 +164,7 @@ Il reste à donner l'accès aux joueurs :
 
 Pour mettre à jour : `docker compose build --no-cache`, puis `docker compose up -d`. Pseudos, sessions et certificat restent dans le volume Docker. Le fichier contient le mot de passe en clair : ne le partagez pas.
 
-**Un nom de domaine avec HTTPS** (une adresse simple, et plus d'empreinte à donner) : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md), qui ajoute Caddy à ce même fichier.
+**Un nom de domaine avec HTTPS** (une adresse simple, et plus d'empreinte à donner) : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md). Il ajoute Caddy à ce même fichier, mais n'importe quel autre reverse proxy (Nginx, Traefik…) convient aussi, et le guide l'explique.
 
 ### Node.js sous Windows
 
@@ -153,7 +176,7 @@ Sans Docker, sur un PC Windows allumé pendant les parties :
 4. Double-cliquez de nouveau sur `demarrer-serveur.cmd`, autorisez Node.js dans le pare-feu Windows s'il le demande, et **laissez la fenêtre ouverte** pendant les parties : l'empreinte à donner aux joueurs s'y affiche.
 5. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte, et ouvrez ou redirigez le port 8080 comme pour Docker.
 
-**Un nom de domaine avec HTTPS** : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md). Le guide (`README.html`) de `TACNET_SERV.zip` détaille Docker et Node.js : mise à jour, sauvegarde, autre port, pseudos bloqués.
+**Un nom de domaine avec HTTPS** : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md) (Caddy, Nginx ou un autre reverse proxy). Le guide (`README.html`) de `TACNET_SERV.zip` détaille Docker et Node.js : mise à jour, sauvegarde, autre port, pseudos bloqués.
 
 ## Les services tiers
 
@@ -195,7 +218,11 @@ Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup
 
 1. Le narrateur est le **gérant**. Il crée la session, puis active *Masquer les autres canaux aux joueurs* et *Le gérant entend toutes les communications* (Paramètres de la session, Communication). Il le fait **avant l'arrivée des joueurs** : sinon leurs premiers écrans montrent encore tous les canaux.
 2. Il crée un canal par rôle de nuit, **Loups**, **Voyante** et **Sorcière**, plus un canal **Narrateur** pour lui (il doit être dans un canal pour parler et pour écouter).
-3. Les 10 joueurs rejoignent la session : ils arrivent « hors canal vocal ». Le narrateur place les 3 loups dans Loups, la voyante dans Voyante et la sorcière dans Sorcière (glisser-déposer du joueur sur le canal, ou clic droit sur le joueur puis *Déplacer vers*), puis entre dans son canal. **Les 5 villageois ne bougent pas** : ils restent hors canal vocal, dans la session comme tout le monde, pour que leur présence ne trahisse aucun rôle.
+3. Les 10 joueurs rejoignent la session : ils arrivent « hors canal vocal ». Le narrateur les place :
+   - les 3 loups dans Loups, la voyante dans Voyante et la sorcière dans Sorcière (glisser-déposer du joueur sur le canal, ou clic droit sur le joueur puis *Déplacer vers*) ;
+   - lui-même dans son canal.
+
+   **Les 5 villageois ne bougent pas** : ils restent hors canal vocal, dans la session comme tout le monde, pour que leur présence ne trahisse aucun rôle.
 
 **Une nuit**
 
@@ -218,7 +245,7 @@ Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup
 **Bon à savoir**
 
 - Pour un rôle de nuit de plus (Cupidon, par exemple), ajoutez un canal et placez-y le joueur.
-- Le RAD Général du narrateur est entendu par tous les joueurs placés dans un canal, mais pas par les villageois hors canal vocal.
+- La RAD Générale du narrateur est entendu par tous les joueurs placés dans un canal, mais pas par les villageois hors canal vocal.
 - Utilisez un casque : sinon la voix jouée par les haut-parleurs peut repartir dans le micro d'un autre vocal.
 
 ## Licence

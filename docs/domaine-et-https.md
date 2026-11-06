@@ -10,6 +10,8 @@ Sans domaine, les joueurs saisissent l'adresse de votre machine, un numéro de p
 
 Pour cela, un petit logiciel, le **reverse proxy**, reçoit leurs connexions et les transmet à TACNET. Ce guide utilise **Caddy**, qui obtient et renouvelle tout seul le certificat HTTPS.
 
+> **Caddy n'est pas le seul choix.** Il est choisi ici parce qu'il est le plus simple, mais TACNET fonctionne avec **n'importe quel reverse proxy** : Nginx, Nginx Proxy Manager, Traefik, HAProxy, Apache, celui de votre NAS ou de votre box… Si vous en avez déjà un, ou si vous préférez un autre, passez directement à [Un autre reverse proxy](#un-autre-reverse-proxy-nginx-haproxy-traefik).
+
 ```
 Application  →  wss:// chiffré  →  Caddy  →  ws:// local  →  Serveur TACNET
 ```
@@ -174,13 +176,45 @@ Autorisez Caddy dans le pare-feu Windows s'il le demande. **Laissez la fenêtre 
 | `curl` : code 502 ou 503 | Caddy ne joint pas TACNET. Docker : `docker compose ps` doit montrer `tacnet` et `caddy` en `Up`, et le Caddyfile doit contenir `tacnet:8080`. Windows : la fenêtre du serveur doit être ouverte, et `config.env` contenir `TLS=off`. |
 | « Certificat refusé » dans l'application | L'adresse doit commencer par `wss://`, et l'empreinte doit être vide. |
 
-## Un autre reverse proxy (Nginx, HAProxy…)
+## Un autre reverse proxy (Nginx, HAProxy, Traefik…)
 
-Si vous avez déjà un reverse proxy, ou si vous préférez un autre que Caddy, TACNET n'en impose aucun. Réglez le serveur avec `TLS=off`, `TRUST_PROXY=true` et un port joignable par le proxy seul, puis configurez le proxy pour qu'il fasse ces quatre choses :
+**Caddy est un choix, pas une obligation.** Si vous avez déjà un reverse proxy (Nginx, Nginx Proxy Manager, Traefik, HAProxy, Apache, celui de votre NAS…), ou si vous en préférez un autre, gardez-le : il suffit de régler deux choses.
+
+**1. Le serveur TACNET** doit savoir qu'un proxy chiffre à sa place, et ne doit être joignable que par lui :
+
+| | Réglage |
+|---|---|
+| Docker | Dans `docker-compose.yml` : `TLS: "off"` et `TRUST_PROXY: "true"`, avec `"127.0.0.1:8080:8080"` à la place de `"8080:8080"` si le proxy est sur la même machine (ou aucun `ports` si le proxy est un conteneur du même fichier, comme Caddy plus haut). |
+| Node.js | Dans `config.env` : `TLS=off`, `TRUST_PROXY=true` et `HOST=127.0.0.1`. |
+
+**2. Le proxy** doit faire ces quatre choses :
 
 1. **Chiffrer** côté joueurs, avec un certificat valide pour votre domaine.
 2. **Laisser passer le WebSocket** vers le serveur (en-têtes `Upgrade` et `Connection`).
 3. **Ajouter l'adresse du joueur** à la fin de l'en-tête `X-Forwarded-For`.
 4. **Garder les connexions longues ouvertes** : une session peut durer des heures.
 
-Le guide du dossier `TACNET_SERV.zip` (page des [Releases](https://github.com/yanks-user/TACNET/releases/latest)) donne des exemples complets pour Nginx et HAProxy, avec le certificat Let's Encrypt.
+Exemple pour **Nginx**, dans le bloc `server` qui écoute en HTTPS sur votre domaine :
+
+```
+location / {
+    proxy_pass http://127.0.0.1:8080;
+
+    # Passage de HTTP à WebSocket
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    # Vraie adresse du joueur, lue par TRUST_PROXY
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    # Une session peut durer des heures
+    proxy_read_timeout 1h;
+    proxy_send_timeout 1h;
+}
+```
+
+Avec **Nginx Proxy Manager**, créez un *Proxy Host* vers `127.0.0.1` (ou l'adresse de la machine) port `8080`, cochez **Websockets Support** et demandez un certificat **Let's Encrypt** dans l'onglet SSL.
+
+Dans tous les cas, les joueurs saisissent `wss://tacnet.example.com` et laissent l'empreinte vide. Le guide du dossier `TACNET_SERV.zip` (page des [Releases](https://github.com/yanks-user/TACNET/releases/latest)) donne des exemples complets pour Nginx et HAProxy, avec le certificat Let's Encrypt.
