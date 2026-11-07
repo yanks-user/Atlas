@@ -19,12 +19,12 @@ Une application Windows pour les parties de jeu en équipe, les soirées, les r�
 
 ## Télécharger
 
-Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/releases/latest). Version actuelle : **1.10.0**.
+Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/releases/latest). Version actuelle : **1.10.1**.
 
 | Fichier | Pour qui | Contenu |
 |---|---|---|
 | `TACNET-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : sans droits d'administrateur, dans le dossier de votre choix, et mis à jour tout seul. |
-| `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.10.0-portable.exe`) et un guide en français. |
+| `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.10.1-portable.exe`) et un guide en français. |
 | `TACNET_SERV.zip` | Les plus avancés | Un serveur à lancer avec Node.js sous Windows, avec son guide (Docker, domaine, HTTPS). |
 
 > **« Windows a protégé votre PC » ?** C'est normal : TACNET n'est pas signé, car un certificat de signature de code est payant. Cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
