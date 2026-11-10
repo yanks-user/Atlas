@@ -19,12 +19,12 @@ Une application Windows pour les parties de jeu en équipe, les soirées, les r�
 
 ## Télécharger
 
-Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/Atlas/releases/latest). Version actuelle : **1.12.0**.
+Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/Atlas/releases/latest). Version actuelle : **1.13.0**.
 
 | Fichier | Pour qui | Contenu |
 |---|---|---|
 | `Atlas-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : sans droits d'administrateur, dans le dossier de votre choix, et mis à jour tout seul. |
-| `Atlas_APP.zip` | Sans installation | La version portable (`Atlas-1.12.0-portable.exe`) et un guide en français. |
+| `Atlas_APP.zip` | Sans installation | La version portable (`Atlas-1.13.0-portable.exe`) et un guide en français. |
 | `Atlas_SERV.zip` | Les plus avancés | Un serveur à lancer avec Node.js sous Windows, avec son guide (Docker, domaine, HTTPS). |
 
 > **« Windows a protégé votre PC » ?** C'est normal : Atlas n'est pas signé, car un certificat de signature de code est payant. Cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
