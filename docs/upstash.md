@@ -1,6 +1,6 @@
 # Garder les pseudos et les sessions avec Upstash (facultatif)
 
-[← Retour à la page TACNET](../README.md#render)
+[← Retour à la page Atlas](../README.md#render)
 
 Sur le plan gratuit de Render, le disque est effacé à chaque redémarrage : les pseudos réservés et les sessions gardées disparaissent. Sans cette option, rien ne change. Avec elle, le serveur copie ses pseudos réservés, ses codes de session et ses sessions gardées chez [Upstash](https://upstash.com), un petit service en ligne gratuit (environ 256 Mo et 500 000 commandes par mois d'après Upstash), et les y retrouve après chaque redémarrage, mise à jour ou mise en veille.
 

@@ -1,12 +1,12 @@
-<p align="center"><img src="docs/logo.png" alt="Logo de TACNET" width="96"></p>
+<p align="center"><img src="docs/logo.png" alt="Logo d'Atlas" width="96"></p>
 
-# TACNET
+# Atlas
 
 **Communication vocale par sessions : parlez en groupe, canal par canal, comme avec une radio.**
 
 Une application Windows pour les parties de jeu en équipe, les soirées, les réunions. Une personne crée une session et partage un code de 4 caractères ; les autres la rejoignent et choisissent leur canal. Le serveur ne fait que mettre les joueurs en relation : la voix circule directement entre eux.
 
-![Vue d'un joueur dans TACNET](docs/vue-joueur.jpg)
+![Vue d'un joueur dans Atlas](docs/vue-joueur.jpg)
 
 ## L'essentiel
 
@@ -19,26 +19,26 @@ Une application Windows pour les parties de jeu en équipe, les soirées, les r�
 
 ## Télécharger
 
-Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/TACNET/releases/latest). Version actuelle : **1.11.1**.
+Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/Atlas/releases/latest). Version actuelle : **1.11.1**.
 
 | Fichier | Pour qui | Contenu |
 |---|---|---|
-| `TACNET-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : sans droits d'administrateur, dans le dossier de votre choix, et mis à jour tout seul. |
-| `TACNET_APP.zip` | Sans installation | La version portable (`TACNET-1.11.1-portable.exe`) et un guide en français. |
-| `TACNET_SERV.zip` | Les plus avancés | Un serveur à lancer avec Node.js sous Windows, avec son guide (Docker, domaine, HTTPS). |
+| `Atlas-Setup-x.y.z.exe` | **Tout le monde (conseillé)** | L'installateur : sans droits d'administrateur, dans le dossier de votre choix, et mis à jour tout seul. |
+| `Atlas_APP.zip` | Sans installation | La version portable (`Atlas-1.11.1-portable.exe`) et un guide en français. |
+| `Atlas_SERV.zip` | Les plus avancés | Un serveur à lancer avec Node.js sous Windows, avec son guide (Docker, domaine, HTTPS). |
 
-> **« Windows a protégé votre PC » ?** C'est normal : TACNET n'est pas signé, car un certificat de signature de code est payant. Cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
+> **« Windows a protégé votre PC » ?** C'est normal : Atlas n'est pas signé, car un certificat de signature de code est payant. Cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
 
 Un bandeau prévient quand une nouvelle version est publiée ; rien n'est téléchargé ni installé sans votre clic. [Installation, mises à jour et réglages](docs/installation.md).
 
 ## Il faut un serveur
 
-TACNET a besoin d'un serveur pour mettre les joueurs en relation. Trois façons d'en avoir un, de la plus simple à la plus libre. Dans les trois cas, les joueurs utilisent la même application : une adresse et un mot de passe.
+Atlas a besoin d'un serveur pour mettre les joueurs en relation. Trois façons d'en avoir un, de la plus simple à la plus libre. Dans les trois cas, les joueurs utilisent la même application : une adresse et un mot de passe.
 
 | | [Render](#render) | [Docker](#docker) | [Node.js sous Windows](#nodejs-sous-windows) |
 |---|---|---|---|
 | **Pour qui** | Personne n'a de machine à laisser allumée | Un NAS, un mini-serveur, un VPS ou un PC avec Docker | Un PC Windows allumé pendant les parties |
-| **Il vous faut** | Un compte Render, gratuit | Docker et un fichier `docker-compose.yml` | Node.js et `TACNET_SERV.zip` |
+| **Il vous faut** | Un compte Render, gratuit | Docker et un fichier `docker-compose.yml` | Node.js et `Atlas_SERV.zip` |
 | **Vos données** | Effacées à chaque redémarrage (plan gratuit) | Gardées | Gardées |
 | **Chiffrement** | Automatique | Certificat auto-signé, ou [domaine avec HTTPS](docs/domaine-et-https.md) | Comme Docker |
 
@@ -46,24 +46,24 @@ TACNET a besoin d'un serveur pour mettre les joueurs en relation. Trois façons 
 
 **Conseillé pour commencer** : gratuit, sans machine à laisser allumée et sans compte GitHub.
 
-1. Sur [Render](https://render.com) : **New +**, **Web Service**, **Public Git Repository**, puis collez `https://github.com/yanks-user/TACNET-SERVER-RENDER`.
+1. Sur [Render](https://render.com) : **New +**, **Web Service**, **Public Git Repository**, puis collez `https://github.com/yanks-user/Atlas-SERVER-RENDER`.
 2. Réglez *Language* sur **Docker**, choisissez le plan **Free**, et laissez le reste vide.
 3. Ajoutez la variable d'environnement `SERVER_PASSWORD` (8 caractères minimum), puis lancez le déploiement.
 4. Donnez aux joueurs l'adresse `wss://nom-du-service.onrender.com` et le mot de passe.
 
-> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le pas-à-pas détaillé est dans le guide de `TACNET_APP.zip`.
+> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le pas-à-pas détaillé est dans le guide de `Atlas_APP.zip`.
 
 ### Docker
 
-Rien à télécharger : Docker construit le serveur depuis le [dépôt public](https://github.com/yanks-user/TACNET-SERVER-RENDER), comme Render. Quatre étapes.
+Rien à télécharger : Docker construit le serveur depuis le [dépôt public](https://github.com/yanks-user/Atlas-SERVER-RENDER), comme Render. Quatre étapes.
 
 **1. Installez [Docker](https://docs.docker.com/get-docker/)** : Docker Desktop sous Windows ou Mac, Docker Engine avec Compose sous Linux (un NAS le propose souvent).
 
 **2. Créez un dossier pour le serveur** dans un terminal (SSH sur un NAS ou un hébergeur, PowerShell sous Windows) :
 
 ```
-mkdir tacnet-serveur
-cd tacnet-serveur
+mkdir atlas-serveur
+cd atlas-serveur
 ```
 
 **3. Créez et réglez le fichier.** Cette commande crée `docker-compose.yml` et l'ouvre dans nano (sous Windows, `notepad docker-compose.yml`) :
@@ -75,15 +75,15 @@ nano docker-compose.yml
 Collez le contenu ci-dessous et remplacez le mot de passe (8 caractères minimum). Enregistrez avec **Ctrl+O** puis **Entrée**, et quittez avec **Ctrl+X**.
 
 ```yaml
-# Serveur TACNET : le seul fichier à créer
+# Serveur Atlas : le seul fichier à créer
 #
 # Pour mettre à jour le serveur proprement (deux commandes, dans le dossier de ce fichier) :
 #   docker compose build --no-cache
 #   docker compose up -d
 services:
-  tacnet:
-    # Construit depuis le dépôt public de TACNET, comme Render
-    build: https://github.com/yanks-user/TACNET-SERVER-RENDER.git
+  atlas:
+    # Construit depuis le dépôt public d'Atlas, comme Render
+    build: https://github.com/yanks-user/Atlas-SERVER-RENDER.git
     restart: unless-stopped
     init: true
     stop_grace_period: 15s
@@ -98,7 +98,7 @@ services:
       # TRUST_PROXY: "true"
     volumes:
       # Pseudos, codes, sessions et certificat : survivent aux mises à jour
-      - tacnet-data:/data
+      - atlas-data:/data
     read_only: true
     tmpfs:
       - /tmp
@@ -107,7 +107,7 @@ services:
     security_opt:
       - no-new-privileges:true
 volumes:
-  tacnet-data:
+  atlas-data:
 ```
 
 **4. Créez et lancez le serveur**, toujours dans ce dossier :
@@ -120,7 +120,7 @@ La première fois, la construction prend une à deux minutes ; `-d` lance ensuit
 
 Il reste à donner l'accès aux joueurs :
 
-1. Relevez l'empreinte du certificat avec `docker compose logs tacnet` (ligne « Empreinte du certificat »).
+1. Relevez l'empreinte du certificat avec `docker compose logs atlas` (ligne « Empreinte du certificat »).
 2. Donnez-leur l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte.
 3. Ouvrez le port 8080 (ou celui choisi dans `ports`), et redirigez-le depuis votre box pour jouer hors de votre réseau.
 
@@ -139,18 +139,18 @@ Pas de `docker compose pull` : le serveur est construit depuis GitHub, il n'y a 
 
 Sans Docker, sur un PC Windows allumé pendant les parties :
 
-1. Installez la version LTS de [Node.js](https://nodejs.org), puis décompressez `TACNET_SERV.zip` où vous voulez.
+1. Installez la version LTS de [Node.js](https://nodejs.org), puis décompressez `Atlas_SERV.zip` où vous voulez.
 2. Double-cliquez sur `demarrer-serveur.cmd` : il prépare le serveur, crée `config.env` et l'ouvre dans le Bloc-notes. Remplissez `SERVER_PASSWORD` (8 caractères minimum), enregistrez, fermez.
 3. Double-cliquez de nouveau dessus, autorisez Node.js dans le pare-feu s'il le demande, et **laissez la fenêtre ouverte** pendant les parties : l'empreinte à donner aux joueurs s'y affiche.
 4. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte, et ouvrez ou redirigez le port 8080 comme pour Docker.
 
-Pour un nom de domaine avec HTTPS, voir le [guide Domaine et HTTPS](docs/domaine-et-https.md). Le guide de `TACNET_SERV.zip` détaille la mise à jour, la sauvegarde, l'autre port et les pseudos bloqués.
+Pour un nom de domaine avec HTTPS, voir le [guide Domaine et HTTPS](docs/domaine-et-https.md). Le guide de `Atlas_SERV.zip` détaille la mise à jour, la sauvegarde, l'autre port et les pseudos bloqués.
 
 ## Les services tiers
 
-TACNET s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
+Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
 
-![Schéma des services tiers de TACNET : les joueurs, Render, GitHub, Upstash (facultatif) et le STUN de Google](docs/services-tiers.png)
+![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash (facultatif) et le STUN de Google](docs/services-tiers.png)
 
 [Ce que chaque service voit, et ce qu'il coûte](docs/services-tiers.md).
 
@@ -168,7 +168,7 @@ L'overlay des canaux, en jeu : maintenez la touche, la molette choisit, relâche
 
 Les canaux masqués servent à garder un secret. Le narrateur est le **gérant** : il crée les canaux **Loups**, **Voyante**, **Sorcière** et **Narrateur**, active *Masquer les autres canaux aux joueurs* **avant l'arrivée des joueurs**, puis place les 3 loups, la voyante et la sorcière dans leur canal. Les 5 villageois restent hors canal vocal.
 
-La nuit, tout le monde coupe son micro sur Discord et le narrateur appelle les rôles un par un sur TACNET. Chacun garde son canal toute la partie, ne voit que ses complices et n'entend que le narrateur.
+La nuit, tout le monde coupe son micro sur Discord et le narrateur appelle les rôles un par un sur Atlas. Chacun garde son canal toute la partie, ne voit que ses complices et n'entend que le narrateur.
 
 | Le narrateur voit tout | Un villageois ne voit personne |
 |---|---|

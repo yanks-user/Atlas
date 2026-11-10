@@ -1,24 +1,24 @@
-# Domaine et HTTPS pour votre serveur TACNET
+# Domaine et HTTPS pour votre serveur Atlas
 
-[← Retour à la page TACNET](../README.md#il-faut-un-serveur)
+[← Retour à la page Atlas](../README.md#il-faut-un-serveur)
 
-Ce guide est pour celles et ceux qui **hébergent leur propre serveur** TACNET, avec Docker ou avec Node.js sous Windows. Sur Render, le nom de domaine et le HTTPS sont déjà fournis : il n'y a rien à faire.
+Ce guide est pour celles et ceux qui **hébergent leur propre serveur** Atlas, avec Docker ou avec Node.js sous Windows. Sur Render, le nom de domaine et le HTTPS sont déjà fournis : il n'y a rien à faire.
 
 ## À quoi ça sert
 
-Sans domaine, les joueurs saisissent l'adresse de votre machine, un numéro de port et une empreinte à recopier. **Avec un nom de domaine**, ils saisissent une adresse simple, `wss://tacnet.example.com`, et **plus d'empreinte** : la connexion est chiffrée avec un vrai certificat.
+Sans domaine, les joueurs saisissent l'adresse de votre machine, un numéro de port et une empreinte à recopier. **Avec un nom de domaine**, ils saisissent une adresse simple, `wss://atlas.example.com`, et **plus d'empreinte** : la connexion est chiffrée avec un vrai certificat.
 
-Pour cela, un petit logiciel, le **reverse proxy**, reçoit leurs connexions et les transmet à TACNET. Ce guide utilise **Caddy**, qui obtient et renouvelle tout seul le certificat HTTPS.
+Pour cela, un petit logiciel, le **reverse proxy**, reçoit leurs connexions et les transmet à Atlas. Ce guide utilise **Caddy**, qui obtient et renouvelle tout seul le certificat HTTPS.
 
-> **Caddy n'est pas le seul choix.** Il est choisi ici parce qu'il est le plus simple, mais TACNET fonctionne avec **n'importe quel reverse proxy** : Nginx, Nginx Proxy Manager, Traefik, HAProxy, Apache, celui de votre NAS ou de votre box… Si vous en avez déjà un, ou si vous préférez un autre, passez directement à [Un autre reverse proxy](#un-autre-reverse-proxy-nginx-haproxy-traefik).
+> **Caddy n'est pas le seul choix.** Il est choisi ici parce qu'il est le plus simple, mais Atlas fonctionne avec **n'importe quel reverse proxy** : Nginx, Nginx Proxy Manager, Traefik, HAProxy, Apache, celui de votre NAS ou de votre box… Si vous en avez déjà un, ou si vous préférez un autre, passez directement à [Un autre reverse proxy](#un-autre-reverse-proxy-nginx-haproxy-traefik).
 
 ```
-Application  →  wss:// chiffré  →  Caddy  →  ws:// local  →  Serveur TACNET
+Application  →  wss:// chiffré  →  Caddy  →  ws:// local  →  Serveur Atlas
 ```
 
 ## Avant de commencer
 
-Trois choses à avoir en place. Dans tout ce guide, remplacez `tacnet.example.com` par votre domaine.
+Trois choses à avoir en place. Dans tout ce guide, remplacez `atlas.example.com` par votre domaine.
 
 1. **Un nom de domaine**, ou un sous-domaine gratuit (DuckDNS, par exemple).
 2. **Ce nom pointe vers votre machine.** Chez le service où vous l'avez obtenu, créez un enregistrement `A` avec l'adresse IP publique de votre box. Attendez quelques minutes.
@@ -26,12 +26,12 @@ Trois choses à avoir en place. Dans tout ce guide, remplacez `tacnet.example.co
 
 ## Avec Docker
 
-On ajoute Caddy au fichier du serveur : tout reste dans le même dossier, et une seule commande démarre l'ensemble. Il faut que le serveur Docker de la [page TACNET](../README.md#docker) soit déjà en place.
+On ajoute Caddy au fichier du serveur : tout reste dans le même dossier, et une seule commande démarre l'ensemble. Il faut que le serveur Docker de la [page Atlas](../README.md#docker) soit déjà en place.
 
 **1. Placez-vous dans le dossier du serveur**, celui qui contient `docker-compose.yml` :
 
 ```
-cd tacnet-serveur
+cd atlas-serveur
 ```
 
 **2. Créez le fichier de Caddy.** Cette commande crée `Caddyfile` et l'ouvre dans l'éditeur nano :
@@ -43,12 +43,12 @@ nano Caddyfile
 Collez ces trois lignes, avec votre domaine, puis enregistrez (**Ctrl+O**, **Entrée**) et quittez (**Ctrl+X**) :
 
 ```
-tacnet.example.com {
-    reverse_proxy tacnet:8080
+atlas.example.com {
+    reverse_proxy atlas:8080
 }
 ```
 
-`tacnet` est le nom du service dans `docker-compose.yml` : ne le changez pas.
+`atlas` est le nom du service dans `docker-compose.yml` : ne le changez pas.
 
 **3. Remplacez le fichier du serveur.** Ouvrez-le, effacez son contenu (dans nano, **Ctrl+K** plusieurs fois), collez celui-ci, remettez votre mot de passe (8 caractères minimum), puis enregistrez et quittez comme avant :
 
@@ -57,30 +57,30 @@ nano docker-compose.yml
 ```
 
 ```yaml
-# Serveur TACNET + Caddy (domaine et HTTPS) : le seul fichier à changer
+# Serveur Atlas + Caddy (domaine et HTTPS) : le seul fichier à changer
 #
 # Pour mettre à jour le serveur proprement (deux commandes, dans le dossier de ce fichier) :
 #   docker compose build --no-cache
 #   docker compose up -d
 # (Pour mettre à jour Caddy aussi, ajoutez « docker compose pull » avant la seconde.)
 services:
-  tacnet:
-    # Construit depuis le dépôt public de TACNET, comme Render
-    build: https://github.com/yanks-user/TACNET-SERVER-RENDER.git
+  atlas:
+    # Construit depuis le dépôt public d'Atlas, comme Render
+    build: https://github.com/yanks-user/Atlas-SERVER-RENDER.git
     restart: unless-stopped
     init: true
     stop_grace_period: 15s
-    # Pas de "ports" : seul Caddy joint TACNET, à l'intérieur de Docker
+    # Pas de "ports" : seul Caddy joint Atlas, à l'intérieur de Docker
     expose:
       - "8080"
     environment:
       # Mot de passe demandé aux joueurs, 8 caractères minimum
       SERVER_PASSWORD: "changez-moi-svp"
-      # Caddy chiffre et transmet : TACNET n'a plus besoin de son certificat
+      # Caddy chiffre et transmet : Atlas n'a plus besoin de son certificat
       TLS: "off"
       TRUST_PROXY: "true"
     volumes:
-      - tacnet-data:/data
+      - atlas-data:/data
     read_only: true
     tmpfs:
       - /tmp
@@ -93,7 +93,7 @@ services:
     image: caddy:2
     restart: unless-stopped
     depends_on:
-      - tacnet
+      - atlas
     ports:
       - "80:80"
       - "443:443"
@@ -104,12 +104,12 @@ services:
       - caddy-config:/config
 
 volumes:
-  tacnet-data:
+  atlas-data:
   caddy-data:
   caddy-config:
 ```
 
-Ce qui change : TACNET n'ouvre plus de port vers l'extérieur (seul Caddy est joignable), `TLS` et `TRUST_PROXY` sont activés, et un second service, `caddy`, apparaît.
+Ce qui change : Atlas n'ouvre plus de port vers l'extérieur (seul Caddy est joignable), `TLS` et `TRUST_PROXY` sont activés, et un second service, `caddy`, apparaît.
 
 **4. Démarrez :**
 
@@ -128,12 +128,12 @@ docker compose logs caddy
 La ligne `certificate obtained successfully` confirme que le certificat est obtenu. Puis, depuis n'importe quel ordinateur :
 
 ```
-curl -i https://tacnet.example.com/
+curl -i https://atlas.example.com/
 ```
 
 La réponse attendue est un code **426** avec `WebSocket uniquement.` : c'est bon signe.
 
-**6. Prévenez les joueurs.** Dans TACNET, **Paramètres > Serveur** : adresse `wss://tacnet.example.com`, sans numéro de port, et **empreinte vide**.
+**6. Prévenez les joueurs.** Dans Atlas, **Paramètres > Serveur** : adresse `wss://atlas.example.com`, sans numéro de port, et **empreinte vide**.
 
 > **Docker Desktop (Windows, Mac).** Tous les joueurs peuvent y arriver avec la même adresse : une seule personne qui se trompe 5 fois de mot de passe bloque alors tout le monde pendant une minute. Sur Linux, un NAS ou un hébergeur, ce cas ne se présente pas.
 
@@ -143,7 +143,7 @@ Caddy est un seul fichier à lancer à côté du serveur, sans installation.
 
 **1. Téléchargez Caddy.** Sur [caddyserver.com/download](https://caddyserver.com/download), choisissez **Windows** et **amd64**, puis enregistrez le fichier sous le nom `caddy.exe` dans un nouveau dossier, par exemple `C:\caddy`.
 
-**2. Réglez le serveur TACNET.** Ajoutez ces trois lignes dans `config.env` (à côté de `demarrer-serveur.cmd`), puis fermez la fenêtre du serveur et relancez `demarrer-serveur.cmd` :
+**2. Réglez le serveur Atlas.** Ajoutez ces trois lignes dans `config.env` (à côté de `demarrer-serveur.cmd`), puis fermez la fenêtre du serveur et relancez `demarrer-serveur.cmd` :
 
 ```
 TLS=off
@@ -156,7 +156,7 @@ HOST=127.0.0.1
 **3. Créez le fichier de Caddy.** Dans `C:\caddy`, créez avec le Bloc-notes un fichier nommé exactement `Caddyfile`, sans extension (**Enregistrer sous**, type **Tous les fichiers**), avec votre domaine :
 
 ```
-tacnet.example.com {
+atlas.example.com {
     reverse_proxy 127.0.0.1:8080
 }
 ```
@@ -170,22 +170,22 @@ cd C:\caddy
 
 Autorisez Caddy dans le pare-feu Windows s'il le demande. **Laissez la fenêtre ouverte pendant les parties**, comme celle du serveur : la fermer arrête Caddy. La ligne `certificate obtained successfully` confirme que le certificat est obtenu.
 
-**5. Vérifiez et prévenez les joueurs.** Ouvrez `https://tacnet.example.com` dans un navigateur : la page affiche `WebSocket uniquement.`, c'est bon signe. Les joueurs saisissent dans **Paramètres > Serveur** l'adresse `wss://tacnet.example.com`, sans numéro de port, et **l'empreinte vide**.
+**5. Vérifiez et prévenez les joueurs.** Ouvrez `https://atlas.example.com` dans un navigateur : la page affiche `WebSocket uniquement.`, c'est bon signe. Les joueurs saisissent dans **Paramètres > Serveur** l'adresse `wss://atlas.example.com`, sans numéro de port, et **l'empreinte vide**.
 
 ## Si ça ne marche pas
 
 | Ce que vous voyez | Que faire |
 |---|---|
 | Le journal de Caddy parle de `timeout` ou d'un certificat impossible à obtenir | Les ports 80 et 443 ne sont pas joignables depuis Internet : vérifiez la redirection de votre box et le pare-feu. Certains fournisseurs bloquent le port 80. |
-| Le navigateur ne trouve pas `tacnet.example.com` | Le nom ne pointe pas encore vers votre box : vérifiez l'enregistrement `A` et patientez quelques minutes. Si l'adresse IP de votre box change, utilisez un service d'adresse dynamique (DuckDNS, par exemple). |
-| `curl` : code 502 ou 503 | Caddy ne joint pas TACNET. Docker : `docker compose ps` doit montrer `tacnet` et `caddy` en `Up`, et le Caddyfile doit contenir `tacnet:8080`. Windows : la fenêtre du serveur doit être ouverte, et `config.env` contenir `TLS=off`. |
+| Le navigateur ne trouve pas `atlas.example.com` | Le nom ne pointe pas encore vers votre box : vérifiez l'enregistrement `A` et patientez quelques minutes. Si l'adresse IP de votre box change, utilisez un service d'adresse dynamique (DuckDNS, par exemple). |
+| `curl` : code 502 ou 503 | Caddy ne joint pas Atlas. Docker : `docker compose ps` doit montrer `atlas` et `caddy` en `Up`, et le Caddyfile doit contenir `atlas:8080`. Windows : la fenêtre du serveur doit être ouverte, et `config.env` contenir `TLS=off`. |
 | « Certificat refusé » dans l'application | L'adresse doit commencer par `wss://`, et l'empreinte doit être vide. |
 
 ## Un autre reverse proxy (Nginx, HAProxy, Traefik…)
 
 **Caddy est un choix, pas une obligation.** Si vous avez déjà un reverse proxy (Nginx, Nginx Proxy Manager, Traefik, HAProxy, Apache, celui de votre NAS…), ou si vous en préférez un autre, gardez-le : il suffit de régler deux choses.
 
-**1. Le serveur TACNET** doit savoir qu'un proxy chiffre à sa place, et ne doit être joignable que par lui :
+**1. Le serveur Atlas** doit savoir qu'un proxy chiffre à sa place, et ne doit être joignable que par lui :
 
 | | Réglage |
 |---|---|
@@ -222,4 +222,4 @@ location / {
 
 Avec **Nginx Proxy Manager**, créez un *Proxy Host* vers `127.0.0.1` (ou l'adresse de la machine) port `8080`, cochez **Websockets Support** et demandez un certificat **Let's Encrypt** dans l'onglet SSL.
 
-Dans tous les cas, les joueurs saisissent `wss://tacnet.example.com` et laissent l'empreinte vide. Le guide du dossier `TACNET_SERV.zip` (page des [Releases](https://github.com/yanks-user/TACNET/releases/latest)) donne des exemples complets pour Nginx et HAProxy, avec le certificat Let's Encrypt.
+Dans tous les cas, les joueurs saisissent `wss://atlas.example.com` et laissent l'empreinte vide. Le guide du dossier `Atlas_SERV.zip` (page des [Releases](https://github.com/yanks-user/Atlas/releases/latest)) donne des exemples complets pour Nginx et HAProxy, avec le certificat Let's Encrypt.

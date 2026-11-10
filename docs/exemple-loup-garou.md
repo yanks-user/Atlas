@@ -1,10 +1,10 @@
 # Exemple : le Loup-Garou à 10 joueurs
 
-[← Retour à la page TACNET](../README.md#exemple--le-loup-garou-à-10-joueurs)
+[← Retour à la page Atlas](../README.md#exemple--le-loup-garou-à-10-joueurs)
 
 Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup-Garou à 10 joueurs : **3 loups-garous, 1 voyante, 1 sorcière et 5 villageois** (les autres rôles se gèrent de la même façon).
 
-**Le principe** : TACNET ne remplace pas votre vocal habituel, il le complète. Le jour, tout le monde débat sur Discord (ou un autre vocal). La nuit, tout le monde coupe son micro sur Discord, et le narrateur utilise TACNET pour parler aux rôles de nuit, un par un. Chacun garde le même canal toute la partie : **personne n'a jamais à changer de canal**.
+**Le principe** : Atlas ne remplace pas votre vocal habituel, il le complète. Le jour, tout le monde débat sur Discord (ou un autre vocal). La nuit, tout le monde coupe son micro sur Discord, et le narrateur utilise Atlas pour parler aux rôles de nuit, un par un. Chacun garde le même canal toute la partie : **personne n'a jamais à changer de canal**.
 
 ## Mise en place, une seule fois
 
@@ -19,7 +19,7 @@ Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup
 ## Une nuit
 
 1. Sur Discord, le narrateur annonce « Le village s'endort » : tout le monde coupe son micro.
-2. Sur TACNET, il appelle les rôles l'un après l'autre : « Les loups-garous se réveillent ». Les loups se concertent entre eux en RAD Int et le narrateur les entend, ils désignent leur victime. Puis « La voyante se réveille » : elle répond, seul le narrateur l'entend. Puis la sorcière.
+2. Sur Atlas, il appelle les rôles l'un après l'autre : « Les loups-garous se réveillent ». Les loups se concertent entre eux en RAD Int et le narrateur les entend, ils désignent leur victime. Puis « La voyante se réveille » : elle répond, seul le narrateur l'entend. Puis la sorcière.
 3. Au matin, tout le monde rouvre son micro sur Discord et le narrateur annonce la victime.
 
 | Le narrateur voit tout et appelle un rôle à la fois | Un loup voit ses complices, et le narrateur qui lui parle |
