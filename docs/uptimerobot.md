@@ -12,6 +12,6 @@ Sur le plan gratuit de Render, le serveur s'endort après 15 minutes sans joueur
 ## À savoir
 
 - UptimeRobot peut afficher le serveur comme « Down » (erreur 426) : c'est normal, le serveur ne répond qu'à l'application. L'appel suffit à le garder éveillé. Coupez les alertes de ce moniteur pour ne pas recevoir d'e-mails.
-- Render offre 750 heures gratuites par mois d'après Render : de quoi garder **un** serveur éveillé tout le mois, pas deux.
+- L'offre Render permet 750 heures gratuites par mois d'après Render : de quoi garder **un** serveur éveillé tout le mois, pas deux serveurs sur la même offre gratuite.
 - Éveillé, le serveur garde ses données plus longtemps, mais son disque reste effacé à chaque redémarrage ou mise à jour : [Upstash](upstash.md) les garde.
 - UptimeRobot est un service tiers : il ne voit que l'adresse du serveur et s'il répond. Jamais les pseudos, les sessions, le mot de passe ni la voix.
