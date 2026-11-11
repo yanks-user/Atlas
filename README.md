@@ -55,7 +55,7 @@ Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans le
 3. Ajoutez la variable d'environnement `SERVER_PASSWORD` (8 caractères minimum), puis lancez le déploiement.
 4. Donnez aux joueurs l'adresse `wss://nom-du-service.onrender.com` et le mot de passe.
 
-> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le service gratuit **UptimeRobot** peut aussi l'empêcher de s'endormir, en l'appelant toutes les 5 minutes. Le pas-à-pas détaillé est dans le guide de `Atlas_APP.zip`.
+> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le service gratuit **UptimeRobot** peut aussi l'empêcher de s'endormir, en l'appelant toutes les 5 minutes : [voir comment](docs/render.md#rester-éveillé-avec-uptimerobot-facultatif). [Le pas-à-pas détaillé](docs/render.md) : vérifier, mettre à jour, changer le mot de passe.
 
 ### Docker
 
