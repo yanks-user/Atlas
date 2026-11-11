@@ -46,20 +46,5 @@ Onglet **Environment** du service : modifiez `SERVER_PASSWORD`, puis enregistrez
 
 ## Le plan gratuit
 
-- Il **s'endort après 15 minutes** sans joueur : la connexion suivante attend environ une minute. [UptimeRobot](#rester-éveillé-avec-uptimerobot-facultatif) peut le garder éveillé.
 - Son disque est **effacé à chaque redémarrage** : les pseudos réservés, les codes et les sessions gardées disparaissent. [Upstash](upstash.md) les garde gratuitement.
-- Il n'a pas de terminal : pour libérer un pseudo bloqué, redémarrez le service (**Manual Deploy**), ce qui les libère tous.
-
-## Rester éveillé avec UptimeRobot (facultatif)
-
-[UptimeRobot](https://uptimerobot.com) appelle le serveur toutes les 5 minutes : il ne s'endort plus, et les joueurs se connectent tout de suite.
-
-1. Sur [uptimerobot.com](https://uptimerobot.com), créez un compte gratuit.
-2. Ajoutez un moniteur (**New monitor**) de type **HTTP(s)**, avec l'adresse `https://nom.onrender.com` et un intervalle de **5 minutes**.
-3. Enregistrez.
-
-À savoir :
-
-- UptimeRobot peut afficher le serveur comme « Down » (erreur 426) : c'est normal, le serveur ne répond qu'à l'application. L'appel suffit à le garder éveillé. Coupez les alertes de ce moniteur pour ne pas recevoir d'e-mails.
-- Render offre 750 heures gratuites par mois d'après Render : de quoi garder **un** serveur éveillé tout le mois, pas deux.
-- UptimeRobot ne voit que l'adresse du serveur et s'il répond. Jamais les pseudos, les sessions, le mot de passe ni la voix.
+- Il **s'endort après 15 minutes** sans joueur : la connexion suivante attend environ une minute. [UptimeRobot](uptimerobot.md) peut le garder éveillé.
