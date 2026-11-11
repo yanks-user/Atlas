@@ -24,11 +24,11 @@ Les canaux masqués servent à garder un secret. Exemple avec une partie de Loup
 
 | Le narrateur voit tout et appelle un rôle à la fois | Un loup voit ses complices, et le narrateur qui lui parle |
 |---|---|
-| ![Vue du narrateur : les canaux Loups, Voyante, Sorcière et Narrateur, et cinq villageois hors canal vocal](loup-garou-narrateur.jpg) | ![Vue d'un loup : le canal Loups avec ses deux complices, et le narrateur en direct](loup-garou-loup.jpg) |
+| ![Vue du narrateur : les canaux Loups, Voyante, Sorcière et Narrateur, et cinq villageois hors canal vocal](loup-garou-narrateur-v2.jpg) | ![Vue d'un loup : le canal Loups avec ses deux complices, et le narrateur en direct](loup-garou-loup-v2.jpg) |
 
 | La voyante est seule dans son canal | Un villageois ne voit personne |
 |---|---|
-| ![Vue de la voyante : seule dans le canal Voyante, le narrateur lui parle](loup-garou-voyante.jpg) | ![Vue d'un villageois : hors canal vocal, seul dans la liste](loup-garou-villageois.jpg) |
+| ![Vue de la voyante : seule dans le canal Voyante, le narrateur lui parle](loup-garou-voyante-v2.jpg) | ![Vue d'un villageois : hors canal vocal, seul dans la liste](loup-garou-villageois-v2.jpg) |
 
 **Ce que chacun voit** : un loup ne voit que ses complices ; la voyante et la sorcière ne voient qu'elles-mêmes ; un villageois ne voit personne et n'entend rien (l'application lui dit « le gérant va vous placer » : c'est normal, il n'a pas besoin de canal) ; seul le narrateur voit tout. Aucun joueur ne peut changer de canal, ni savoir qu'un autre canal existe.
 

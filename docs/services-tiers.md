@@ -4,7 +4,7 @@
 
 Atlas s'appuie sur quelques services extérieurs. Le schéma montre le rôle de chacun, le tableau ce qu'il voit.
 
-![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](services-tiers.png)
+![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](services-tiers-v2.png)
 
 | Service | À quoi il sert | Obligatoire ? | Ce qu'il voit | Coût |
 |---|---|---|---|---|

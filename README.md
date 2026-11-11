@@ -6,7 +6,7 @@
 
 Une application Windows pour les parties de jeu en équipe, les soirées, les réunions. Une personne crée une session et partage un code de 4 caractères ; les autres la rejoignent et choisissent leur canal. Le serveur ne fait que mettre les joueurs en relation : la voix circule directement entre eux.
 
-![Vue d'un joueur dans Atlas](docs/vue-joueur.jpg)
+![Vue d'un joueur dans Atlas](docs/vue-joueur-v2.jpg)
 
 ## L'essentiel
 
@@ -152,7 +152,7 @@ Pour un nom de domaine avec HTTPS, voir le [guide Domaine et HTTPS](docs/domaine
 
 Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash, UptimeRobot et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
 
-![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](docs/services-tiers.png)
+![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](docs/services-tiers-v2.png)
 
 [Ce que chaque service voit, et ce qu'il coûte](docs/services-tiers.md).
 
@@ -160,7 +160,7 @@ Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Re
 
 | La vue du gérant | Qui parle à qui |
 |---|---|
-| ![Vue du gérant avec ses canaux et ses joueurs](docs/vue-gerant.jpg) | ![Tableau « Qui parle à qui » entre les canaux Coordination, Groupe A et Groupe B](docs/qui-parle-a-qui.jpg) |
+| ![Vue du gérant avec ses canaux et ses joueurs](docs/vue-gerant-v2.jpg) | ![Tableau « Qui parle à qui » entre les canaux Coordination, Groupe A et Groupe B](docs/qui-parle-a-qui-v2.jpg) |
 
 ## Exemple : le Loup-Garou à 10 joueurs
 
@@ -170,7 +170,7 @@ La nuit, tout le monde coupe son micro sur Discord et le narrateur appelle les r
 
 | Le narrateur voit tout | Un villageois ne voit personne |
 |---|---|
-| ![Vue du narrateur : les canaux Loups, Voyante, Sorcière et Narrateur](docs/loup-garou-narrateur.jpg) | ![Vue d'un villageois : hors canal vocal, seul dans la liste](docs/loup-garou-villageois.jpg) |
+| ![Vue du narrateur : les canaux Loups, Voyante, Sorcière et Narrateur](docs/loup-garou-narrateur-v2.jpg) | ![Vue d'un villageois : hors canal vocal, seul dans la liste](docs/loup-garou-villageois-v2.jpg) |
 
 [Le pas à pas complet](docs/exemple-loup-garou.md).
 
