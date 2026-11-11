@@ -48,7 +48,7 @@ Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans le
 
 **Conseillé pour commencer** : gratuit, sans machine à laisser allumée et sans compte GitHub.
 
-1. Sur [Render](https://render.com) : **New +**, **Web Service**, **Public Git Repository**, puis collez `https://github.com/yanks-user/Atlas-SERVER-RENDER`.
+1. Sur [Render](https://render.com) : **New +**, **Web Service**, **Public Git Repository**, puis collez `https://github.com/yanks-user/Atlas-Server-Render`.
 2. Réglez *Language* sur **Docker**, choisissez le plan **Free**, et laissez le reste vide.
 3. Ajoutez la variable d'environnement `SERVER_PASSWORD` (8 caractères minimum), puis lancez le déploiement.
 4. Donnez aux joueurs l'adresse `wss://nom-du-service.onrender.com` et le mot de passe.
