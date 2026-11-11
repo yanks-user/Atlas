@@ -28,6 +28,8 @@ Tout se trouve dans la page [**Releases**](https://github.com/yanks-user/Atlas/r
 | `Atlas_SERV.zip` | Les plus avancés | Un serveur à lancer avec Node.js sous Windows, avec son guide (Docker, domaine, HTTPS). |
 
 > **« Windows a protégé votre PC » ?** C'est normal : Atlas n'est pas signé, car un certificat de signature de code est payant. Cliquez sur *Informations complémentaires*, puis *Exécuter quand même*.
+>
+> **Bloqué sans ce bouton** (Smart App Control) ? Clic droit sur le fichier, *Propriétés*, cochez *Débloquer*, puis *OK*. Pour le zip, faites-le avant de le décompresser.
 
 Un bandeau prévient quand une nouvelle version est publiée ; rien n'est téléchargé ni installé sans votre clic. [Installation, mises à jour et réglages](docs/installation.md).
 
