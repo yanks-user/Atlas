@@ -55,7 +55,7 @@ Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans le
 3. Ajoutez la variable d'environnement `SERVER_PASSWORD` (8 caractères minimum), puis lancez le déploiement.
 4. Donnez aux joueurs l'adresse `wss://nom-du-service.onrender.com` et le mot de passe.
 
-> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le service gratuit **UptimeRobot** peut aussi l'empêcher de s'endormir, en l'appelant toutes les 5 minutes : [voir comment](docs/uptimerobot.md). [Le pas-à-pas détaillé](docs/render.md) : vérifier, mettre à jour, changer le mot de passe.
+> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le service gratuit **UptimeRobot** peut aussi l'empêcher de s'endormir, en l'appelant toutes les 10 minutes : [voir comment](docs/uptimerobot.md). [Le pas-à-pas détaillé](docs/render.md) : vérifier, mettre à jour, changer le mot de passe.
 
 ### Docker
 
@@ -154,7 +154,7 @@ Pour un nom de domaine avec HTTPS, voir le [guide Domaine et HTTPS](docs/domaine
 
 Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash, UptimeRobot et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
 
-![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](docs/services-tiers-v2.png)
+![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](docs/services-tiers-v3.png)
 
 [Ce que chaque service voit, et ce qu'il coûte](docs/services-tiers.md).
 

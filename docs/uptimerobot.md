@@ -2,11 +2,11 @@
 
 [← Retour à la page Atlas](../README.md#render)
 
-Sur le plan gratuit de Render, le serveur s'endort après 15 minutes sans joueur, et la connexion suivante attend environ une minute qu'il se réveille. Sans cette option, rien ne change. Avec elle, [UptimeRobot](https://uptimerobot.com), un service en ligne gratuit, appelle le serveur toutes les 5 minutes : il ne s'endort plus, et les joueurs se connectent tout de suite.
+Sur le plan gratuit de Render, le serveur s'endort après 15 minutes sans joueur, et la connexion suivante attend environ une minute qu'il se réveille. Sans cette option, rien ne change. Avec elle, [UptimeRobot](https://uptimerobot.com), un service en ligne gratuit, appelle le serveur toutes les 10 minutes : il ne s'endort plus, et les joueurs se connectent tout de suite.
 
 1. Sur [uptimerobot.com](https://uptimerobot.com), créez un compte gratuit.
 2. Ajoutez un moniteur (**New monitor**) de type **HTTP(s)**.
-3. Saisissez l'adresse de votre service Render, en `https` : `https://nom-du-service.onrender.com`, et un intervalle de **5 minutes**.
+3. Saisissez l'adresse de votre service Render, en `https` : `https://nom-du-service.onrender.com`, et un intervalle de **10 minutes** : c'est assez, puisque Render ne s'endort qu'après 15 minutes sans activité.
 4. Enregistrez.
 
 ## À savoir
