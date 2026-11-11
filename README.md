@@ -53,7 +53,7 @@ Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans le
 3. Ajoutez la variable d'environnement `SERVER_PASSWORD` (8 caractères minimum), puis lancez le déploiement.
 4. Donnez aux joueurs l'adresse `wss://nom-du-service.onrender.com` et le mot de passe.
 
-> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le pas-à-pas détaillé est dans le guide de `Atlas_APP.zip`.
+> **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le service gratuit **UptimeRobot** peut aussi l'empêcher de s'endormir, en l'appelant toutes les 5 minutes. Le pas-à-pas détaillé est dans le guide de `Atlas_APP.zip`.
 
 ### Docker
 
@@ -150,9 +150,9 @@ Pour un nom de domaine avec HTTPS, voir le [guide Domaine et HTTPS](docs/domaine
 
 ## Les services tiers
 
-Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
+Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash, UptimeRobot et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
 
-![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash (facultatif) et le STUN de Google](docs/services-tiers.png)
+![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](docs/services-tiers.png)
 
 [Ce que chaque service voit, et ce qu'il coûte](docs/services-tiers.md).
 
@@ -161,10 +161,6 @@ Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Re
 | La vue du gérant | Qui parle à qui |
 |---|---|
 | ![Vue du gérant avec ses canaux et ses joueurs](docs/vue-gerant.jpg) | ![Tableau « Qui parle à qui » entre les canaux Coordination, Groupe A et Groupe B](docs/qui-parle-a-qui.jpg) |
-
-L'overlay des canaux, en jeu : maintenez la touche, la molette choisit, relâcher y emmène.
-
-![L'overlay des canaux, sur un fond neutre](docs/overlay-en-jeu.jpg)
 
 ## Exemple : le Loup-Garou à 10 joueurs
 
