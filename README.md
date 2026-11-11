@@ -13,9 +13,9 @@ Une application Windows pour les parties de jeu en équipe, les soirées, les r�
 - **Sessions et canaux** : un code à 4 caractères, des canaux créés par le gérant, et un tableau **Qui parle à qui**.
 - **Parler comme à la radio** : la **RAD** vers son canal, les canaux reliés, toute la session ou un seul canal. Les touches marchent même quand un jeu est au premier plan.
 - **Half-Duplex et RAD prioritaire** : un seul émetteur à la fois vers un canal, et des canaux prioritaires qui peuvent couper la parole.
-- **Overlay en jeu** : maintenez une touche, tournez la molette, relâchez : vous changez de canal sans quitter le jeu.
+- **Overlays en jeu** : maintenez une touche, tournez la molette, relâchez : vous changez de canal sans quitter le jeu. Un second overlay choisit la RAD à qui parler, et une touche répond à la dernière personne entendue.
 - **Canaux masqués** : chacun ne voit que son canal, pour garder un secret (exemple plus bas).
-- **À votre façon** : rôles, bips et effet radio personnels, fenêtre épinglable et réductible.
+- **À votre façon** : image de profil, rôles, bips et effet radio personnels, fenêtre épinglable et réductible.
 
 ## Télécharger
 
@@ -33,7 +33,9 @@ Un bandeau prévient quand une nouvelle version est publiée ; rien n'est télé
 
 ## Il faut un serveur
 
-Atlas a besoin d'un serveur pour mettre les joueurs en relation. Trois façons d'en avoir un, de la plus simple à la plus libre. Dans les trois cas, les joueurs utilisent la même application : une adresse et un mot de passe.
+Atlas a besoin d'un serveur pour mettre les joueurs en relation.
+
+Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans les trois cas, les joueurs utilisent la même application : une adresse et un mot de passe.
 
 | | [Render](#render) | [Docker](#docker) | [Node.js sous Windows](#nodejs-sous-windows) |
 |---|---|---|---|
