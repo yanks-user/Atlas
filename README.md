@@ -34,6 +34,10 @@ Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans le
 | **Vos données** | Effacées à chaque redémarrage (plan gratuit) | Gardées |
 | **Chiffrement** | Automatique | Certificat auto-signé, ou [domaine avec HTTPS](docs/domaine-et-https.md) |
 
+## Les services tiers pour render
+
+UpStash pour le stockage et UpTimeRobot pour ne pas que le serveur Render ne se mette en veille.
+
 ### Render
 
 **Conseillé pour commencer** : gratuit, sans machine à laisser allumée et sans compte GitHub.
@@ -127,9 +131,6 @@ Pas de `docker compose pull` : le serveur est construit depuis GitHub, il n'y a 
 
 **Un nom de domaine avec HTTPS** (une adresse simple, et plus d'empreinte à donner) : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md). Il ajoute Caddy à ce même fichier, mais Nginx, Traefik ou tout autre reverse proxy convient aussi.
 
-## Les services tiers
-
-UpStash pour le stockage et UpTimeRobot pour ne pas que le serveur Render ne se mette en veille.
 
 ## Captures
 
