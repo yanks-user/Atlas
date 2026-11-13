@@ -34,11 +34,8 @@ Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans le
 | **Vos données** | Effacées à chaque redémarrage (plan gratuit) | Gardées |
 | **Chiffrement** | Automatique | Certificat auto-signé, ou [domaine avec HTTPS](docs/domaine-et-https.md) |
 
-## Les services tiers pour render
 
-UpStash pour le stockage et UpTimeRobot pour ne pas que le serveur Render ne se mette en veille.
-
-### Render
+## Render
 
 **Conseillé pour commencer** : gratuit, sans machine à laisser allumée et sans compte GitHub.
 
@@ -49,7 +46,7 @@ UpStash pour le stockage et UpTimeRobot pour ne pas que le serveur Render ne se 
 
 > **Plan gratuit** : le serveur s'endort après 15 minutes (le réveil prend environ une minute) et ses pseudos et sessions sont effacés à chaque redémarrage. L'option gratuite **Upstash** les garde : [voir comment](docs/upstash.md). Le service gratuit **UptimeRobot** peut aussi l'empêcher de s'endormir, en l'appelant toutes les 10 minutes : [voir comment](docs/uptimerobot.md). [Le pas-à-pas détaillé](docs/render.md) : vérifier, mettre à jour, changer le mot de passe.
 
-### Docker
+## Docker
 
 Rien à télécharger : Docker construit le serveur depuis le [dépôt public](https://github.com/yanks-user/Atlas-Server-Render), comme Render. Quatre étapes.
 
