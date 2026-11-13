@@ -19,7 +19,7 @@ Une application Windows pour les parties de jeu en équipe, les soirées, les r�
 
 ## Télécharger
 
-Bientôt sur le ##Microsoft ##Store.
+Bientôt sur le ## Microsoft Store.
 
 ## Il faut un serveur
 
