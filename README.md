@@ -47,7 +47,7 @@ Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans le
 
 ### Docker
 
-Rien à télécharger : Docker construit le serveur depuis le [dépôt public](https://github.com/yanks-user/Atlas-SERVER-RENDER), comme Render. Quatre étapes.
+Rien à télécharger : Docker construit le serveur depuis le [dépôt public](https://github.com/yanks-user/Atlas-Server-Render), comme Render. Quatre étapes.
 
 **1. Installez [Docker](https://docs.docker.com/get-docker/)** : Docker Desktop sous Windows ou Mac, Docker Engine avec Compose sous Linux (un NAS le propose souvent).
 
