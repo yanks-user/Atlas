@@ -27,12 +27,12 @@ Atlas a besoin d'un serveur pour mettre les joueurs en relation.
 
 Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans les trois cas, les joueurs utilisent la même application : une adresse et un mot de passe.
 
-| | [Render](#render) | [Docker](#docker)(Prochainement) | [Node.js sous Windows](#nodejs-sous-windows)(Prochainement) |
+| | [Render](#render) | [Docker](#docker) |
 |---|---|---|---|
-| **Pour qui** | Personne n'a de machine à laisser allumée | Un NAS, un mini-serveur, un VPS ou un PC avec Docker | Un PC Windows allumé pendant les parties |
-| **Il vous faut** | Un compte Render, gratuit | Docker et un fichier `docker-compose.yml` | Node.js et `Atlas_SERV.zip` |
-| **Vos données** | Effacées à chaque redémarrage (plan gratuit) | Gardées | Gardées |
-| **Chiffrement** | Automatique | Certificat auto-signé, ou [domaine avec HTTPS](docs/domaine-et-https.md) | Comme Docker |
+| **Pour qui** | Personne n'a de machine à laisser allumée | Un NAS, un mini-serveur, un VPS ou un PC avec Docker |
+| **Il vous faut** | Un compte Render, gratuit | Docker et un fichier `docker-compose.yml` |
+| **Vos données** | Effacées à chaque redémarrage (plan gratuit) | Gardées |
+| **Chiffrement** | Automatique | Certificat auto-signé, ou [domaine avec HTTPS](docs/domaine-et-https.md) |
 
 ### Render
 
