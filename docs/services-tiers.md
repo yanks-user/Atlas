@@ -13,4 +13,4 @@ Schéma des services tiers d'Atlas : Render. Upstash et UptimeRobot sont faculta
 | **UptimeRobot** | Appelle le serveur Render toutes les 10 minutes : il ne s'endort plus après 15 minutes sans joueur, et répond tout de suite. | Non, facultatif : [voir comment](uptimerobot.md). | L'adresse du serveur, et s'il répond. Jamais les pseudos, les sessions, le mot de passe ni la voix. | Plan gratuit |
 | **Votre propre serveur** | Remplace Render, avec un disque durable : Docker (NAS, mini-serveur, hébergeur) ou Node.js sous Windows. | Non, facultatif. | Rien d'extérieur : c'est vous qui l'hébergez. | À votre charge |
 
-La voix ne passe par aucun de ces services : elle circule directement entre les joueurs. Un relais TURN peut s'ajouter en option pour les réseaux qui bloquent les connexions directes (voir le guide).
+La voix ne passe par aucun de ces services : elle circule directement entre les joueurs. Un relais TURN peut s'ajouter en option pour les réseaux qui bloquent les connexions directes.
