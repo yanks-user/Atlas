@@ -2,13 +2,12 @@
 
 [← Retour à la page Atlas](../README.md#les-services-tiers)
 
-Atlas s'appuie sur quelques services extérieurs. Le schéma montre le rôle de chacun, le tableau ce qu'il voit.
+Atlas s'appuie sur quelques services extérieurs.
 
-![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](services-tiers-v3.png)
+![Schéma des services tiers d'Atlas : Render. Upstash et UptimeRobot sont facultatifs.
 
 | Service | À quoi il sert | Obligatoire ? | Ce qu'il voit | Coût |
 |---|---|---|---|---|
-| **GitHub** | Héberge la page du projet, les versions d'Atlas et le code du serveur que Render ou Docker construisent. | Pour télécharger Atlas et créer le serveur sur Render ou Docker. La recherche de mises à jour se désactive. | Votre adresse IP et la version de l'application, comme tout site que vous visitez. | Gratuit |
 | **Render** | Héberge le serveur Atlas, qui met les joueurs en relation. | Non : Docker ou Node.js conviennent aussi. | Les échanges avec le serveur : Render déchiffre la connexion, il voit donc ce qui s'y échange (pseudos, sessions, et le mot de passe du serveur à la connexion). Jamais la voix. | Plan gratuit : le disque est effacé à chaque redémarrage |
 | **Upstash** | Garde les pseudos, les codes de session et les sessions quand le disque de Render est effacé. | Non, facultatif : [voir comment](upstash.md). | Les pseudos, les noms de session et des empreintes de jetons. Jamais le mot de passe du serveur ni la voix. | Plan gratuit |
 | **UptimeRobot** | Appelle le serveur Render toutes les 10 minutes : il ne s'endort plus après 15 minutes sans joueur, et répond tout de suite. | Non, facultatif : [voir comment](uptimerobot.md). | L'adresse du serveur, et s'il répond. Jamais les pseudos, les sessions, le mot de passe ni la voix. | Plan gratuit |
