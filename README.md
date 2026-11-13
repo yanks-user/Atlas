@@ -27,7 +27,7 @@ Atlas a besoin d'un serveur pour mettre les joueurs en relation.
 
 Pour avoir le vôtre, trois façons, de la plus simple à la plus libre. Dans les trois cas, les joueurs utilisent la même application : une adresse et un mot de passe.
 
-| | [Render](#render) | [Docker](#docker) |
+| | [Render](#render) | [Docker](#docker) | |
 |---|---|---|---|
 | **Pour qui** | Personne n'a de machine à laisser allumée | Un NAS, un mini-serveur, un VPS ou un PC avec Docker |
 | **Il vous faut** | Un compte Render, gratuit | Docker et un fichier `docker-compose.yml` |
