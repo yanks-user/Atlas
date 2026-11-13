@@ -127,24 +127,9 @@ Pas de `docker compose pull` : le serveur est construit depuis GitHub, il n'y a 
 
 **Un nom de domaine avec HTTPS** (une adresse simple, et plus d'empreinte à donner) : suivez le [guide Domaine et HTTPS](docs/domaine-et-https.md). Il ajoute Caddy à ce même fichier, mais Nginx, Traefik ou tout autre reverse proxy convient aussi.
 
-### Node.js sous Windows
-
-Sans Docker, sur un PC Windows allumé pendant les parties :
-
-1. Installez la version LTS de [Node.js](https://nodejs.org), puis décompressez `Atlas_SERV.zip` où vous voulez.
-2. Double-cliquez sur `demarrer-serveur.cmd` : il prépare le serveur, crée `config.env` et l'ouvre dans le Bloc-notes. Remplissez `SERVER_PASSWORD` (8 caractères minimum), enregistrez, fermez.
-3. Double-cliquez de nouveau dessus, autorisez Node.js dans le pare-feu s'il le demande, et **laissez la fenêtre ouverte** pendant les parties : l'empreinte à donner aux joueurs s'y affiche.
-4. Donnez aux joueurs l'adresse `wss://ADRESSE-DU-SERVEUR:8080`, le mot de passe et l'empreinte, et ouvrez ou redirigez le port 8080 comme pour Docker.
-
-Pour un nom de domaine avec HTTPS, voir le [guide Domaine et HTTPS](docs/domaine-et-https.md). Le guide de `Atlas_SERV.zip` détaille la mise à jour, la sauvegarde, l'autre port et les pseudos bloqués.
-
 ## Les services tiers
 
-Atlas s'appuie sur GitHub (les téléchargements), et, selon votre choix, sur Render, Upstash, UptimeRobot et le STUN de Google. **La voix ne passe par aucun d'eux** : elle circule directement entre les joueurs.
-
-![Schéma des services tiers d'Atlas : les joueurs, Render, GitHub, Upstash et UptimeRobot (facultatifs) et le STUN de Google](docs/services-tiers-v3.png)
-
-[Ce que chaque service voit, et ce qu'il coûte](docs/services-tiers.md).
+UpStash pour le stockage et UpTimeRobot pour ne pas que le serveur Render ne se mette en veille.
 
 ## Captures
 
@@ -161,9 +146,3 @@ La nuit, tout le monde coupe son micro sur Discord et le narrateur appelle les r
 | Le narrateur voit tout | Un villageois ne voit personne |
 |---|---|
 | ![Vue du narrateur : les canaux Loups, Voyante, Sorcière et Narrateur](docs/loup-garou-narrateur-v2.jpg) | ![Vue d'un villageois : hors canal vocal, seul dans la liste](docs/loup-garou-villageois-v2.jpg) |
-
-[Le pas à pas complet](docs/exemple-loup-garou.md).
-
-## Licence
-
-Tous droits réservés, sauf ce que permet [LICENCE.txt](LICENCE.txt) : utilisation gratuite, partage de copies non modifiées avec leur licence, mais ni vente ni modification. Les composants tiers gardent leurs propres licences, réunies dans le dossier `licenses` des zips.
