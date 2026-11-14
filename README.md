@@ -18,8 +18,7 @@ Une application Windows pour les parties de jeu en équipe, les soirées, les r�
 - **À votre façon** : image de profil, rôles, bips et effet radio personnels, fenêtre épinglable et réductible.
 
 ## Télécharger
-Disponible sur Microsoft Store.
-Lien : [Atlas](https://apps.microsoft.com/detail/9NLBT472GGWZ?hl=fr-fr&gl=FR&ocid=pdpshare)
+Disponible sur Microsoft Store. [Atlas](https://apps.microsoft.com/detail/9NLBT472GGWZ?hl=fr-fr&gl=FR&ocid=pdpshare)
 
 ## Il faut un serveur
 
